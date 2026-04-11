@@ -1,55 +1,59 @@
-import React, { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, useRef } from "react";
 
 const MeshGradient = () => {
+  const canvasRef = useRef(null);
+
   useEffect(() => {
-    // Wait for minigl.js to load, then initialize
-    const initGradient = () => {
-      if (typeof window !== "undefined" && window.Gradient) {
-        const gradient = new window.Gradient();
-        gradient.initGradient("#mesh-gradient-canvas");
+    if (typeof window === "undefined" || !canvasRef.current) return;
+
+    // Set CSS custom properties on the canvas element
+    const el = canvasRef.current;
+    el.style.setProperty("--gradient-color-1", "#0E3952");
+    el.style.setProperty("--gradient-color-2", "#282948");
+    el.style.setProperty("--gradient-color-3", "#0D172E");
+    el.style.setProperty("--gradient-color-4", "#050B11");
+    el.style.setProperty("--gradient-speed", "0.00001");
+
+    // Load minigl.js dynamically
+    const script = document.createElement("script");
+    script.src = "/js/minigl.js";
+    script.async = false; // ensure it executes before we try to use it
+    script.onload = () => {
+      requestAnimationFrame(() => {
+        if (window.Gradient) {
+          try {
+            const gradient = new window.Gradient();
+            gradient.initGradient("#mesh-gradient-canvas");
+          } catch (e) {
+            console.warn("Mesh gradient init failed:", e);
+          }
+        }
+      });
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
       }
     };
-
-    // Check if already loaded
-    if (window.Gradient) {
-      initGradient();
-    } else {
-      // Poll for it
-      const interval = setInterval(() => {
-        if (window.Gradient) {
-          clearInterval(interval);
-          initGradient();
-        }
-      }, 100);
-      return () => clearInterval(interval);
-    }
   }, []);
 
   return (
-    <>
-      <Helmet>
-        <script src="/js/minigl.js" type="text/javascript" />
-      </Helmet>
-      <canvas
-        id="mesh-gradient-canvas"
-        style={{
-          filter: "blur(15px)",
-          transform: "scale(1.3)",
-          zIndex: -1,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          "--gradient-color-1": "#0E3952",
-          "--gradient-color-2": "#282948",
-          "--gradient-color-3": "#0D172E",
-          "--gradient-color-4": "#050B11",
-          "--gradient-speed": "0.00001",
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      id="mesh-gradient-canvas"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: 0,
+        filter: "blur(15px)",
+        transform: "scale(1.3)",
+      }}
+    />
   );
 };
 

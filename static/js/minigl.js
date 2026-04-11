@@ -484,3 +484,6 @@ function normalizeColor(hexCode) {
           }).filter(Boolean).map(normalizeColor)
       }
     }
+
+// Export Gradient to window for external access
+window.Gradient = Gradient;
