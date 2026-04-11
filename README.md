@@ -81,6 +81,21 @@ static/
 | `npm run build` | Production build to `public/` |
 | `npm run serve` | Serve production build locally |
 | `npm run clean` | Clear Gatsby cache |
+| `npm run cms` | Start Decap CMS local proxy (port 8081) |
+
+### Using the CMS locally
+
+To use the CMS admin panel at `/admin/` during local development, you need **two terminals**:
+
+```bash
+# Terminal 1 — Gatsby dev server
+npm start
+
+# Terminal 2 — Decap CMS proxy (required for local_backend)
+npm run cms
+```
+
+Then open http://localhost:8000/admin/ in your browser.
 
 ## Netlify Setup
 

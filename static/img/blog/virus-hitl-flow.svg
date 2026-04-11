@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="400" rx="12" fill="url(#bgGrad3)"/>
+  <rect x="1" y="1" width="898" height="398" rx="11" fill="none" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" fill="#e6edf3" font-size="16" font-weight="600" letter-spacing="0.5">Human-in-the-Loop: The Kill Switch</text>
+
+  <!-- Step 1: Agent calls tool -->
+  <rect x="20" y="60" width="120" height="80" rx="8" fill="#161b22" stroke="#da3633" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="80" y="82" text-anchor="middle" fill="#ff7b72" font-size="18">1</text>
+  <text x="80" y="100" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Agent calls</text>
+  <text x="80" y="114" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">tool</text>
+  <text x="80" y="131" text-anchor="middle" fill="#8b949e" font-size="9">createMission</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="140" y1="100" x2="160" y2="100" stroke="#484f58" stroke-width="2"/>
+  <polygon points="160,95 170,100 160,105" fill="#484f58"/>
+
+  <!-- Step 2: Gateway validates -->
+  <rect x="170" y="60" width="120" height="80" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="230" y="82" text-anchor="middle" fill="#58a6ff" font-size="18">2</text>
+  <text x="230" y="100" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Gateway</text>
+  <text x="230" y="114" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">validates JWT</text>
+  <text x="230" y="131" text-anchor="middle" fill="#8b949e" font-size="9">Token + audience</text>
+
+  <!-- Arrow 2->3 -->
+  <line x1="290" y1="100" x2="310" y2="100" stroke="#484f58" stroke-width="2"/>
+  <polygon points="310,95 320,100 310,105" fill="#484f58"/>
+
+  <!-- Step 3: OPA evaluates -->
+  <rect x="320" y="60" width="120" height="80" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="380" y="82" text-anchor="middle" fill="#58a6ff" font-size="18">3</text>
+  <text x="380" y="100" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">OPA policy</text>
+  <text x="380" y="114" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">requires HITL</text>
+  <text x="380" y="131" text-anchor="middle" fill="#8b949e" font-size="9">Sensitive action</text>
+
+  <!-- Arrow 3->4 -->
+  <line x1="440" y1="100" x2="460" y2="100" stroke="#484f58" stroke-width="2"/>
+  <polygon points="460,95 470,100 460,105" fill="#484f58"/>
+
+  <!-- Step 4: Challenge sent -->
+  <rect x="470" y="60" width="120" height="80" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="530" y="82" text-anchor="middle" fill="#a371f7" font-size="18">4</text>
+  <text x="530" y="100" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Challenge sent</text>
+  <text x="530" y="114" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">to human</text>
+  <text x="530" y="131" text-anchor="middle" fill="#8b949e" font-size="9">Physical device</text>
+
+  <!-- Arrow 4->5 -->
+  <line x1="590" y1="100" x2="610" y2="100" stroke="#484f58" stroke-width="2"/>
+  <polygon points="610,95 620,100 610,105" fill="#484f58"/>
+
+  <!-- Step 5: Human verifies (highlighted - the kill switch) -->
+  <rect x="620" y="55" width="130" height="90" rx="8" fill="#238636" opacity="0.12" stroke="#3fb950" stroke-width="2" filter="url(#glow3)"/>
+  <text x="685" y="80" text-anchor="middle" fill="#3fb950" font-size="18" font-weight="700">5</text>
+  <text x="685" y="98" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Human verifies</text>
+  <text x="685" y="112" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">with FIDO2</text>
+  <text x="685" y="128" text-anchor="middle" fill="#3fb950" font-size="9" font-weight="600">Fingerprint on device</text>
+  <text x="685" y="140" text-anchor="middle" fill="#3fb950" font-size="9">THE KILL SWITCH</text>
+
+  <!-- Arrow 5->6 -->
+  <line x1="750" y1="100" x2="770" y2="100" stroke="#484f58" stroke-width="2"/>
+  <polygon points="770,95 780,100 770,105" fill="#484f58"/>
+
+  <!-- Step 6: Token minted -->
+  <rect x="780" y="60" width="105" height="80" rx="8" fill="#161b22" stroke="#238636" stroke-width="1.5" stroke-opacity="0.6"/>
+  <text x="832" y="82" text-anchor="middle" fill="#3fb950" font-size="18">6</text>
+  <text x="832" y="100" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">Token minted</text>
+  <text x="832" y="114" text-anchor="middle" fill="#e6edf3" font-size="10" font-weight="600">request sent</text>
+  <text x="832" y="131" text-anchor="middle" fill="#8b949e" font-size="9">5s TTL, scoped</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="175" x2="870" y2="175" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Bottom section: Spoofable vs Unspoofable -->
+  <text x="250" y="205" text-anchor="middle" fill="#da3633" font-size="13" font-weight="600" letter-spacing="0.5">What the Virus CAN Spoof</text>
+  <text x="680" y="205" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="600" letter-spacing="0.5">What the Virus CANNOT Spoof</text>
+
+  <!-- Spoofable items -->
+  <rect x="50" y="220" width="170" height="42" rx="6" fill="#161b22" stroke="#da3633" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="135" y="237" text-anchor="middle" fill="#ff7b72" font-size="11" font-weight="600">SMS OTP</text>
+  <text x="135" y="254" text-anchor="middle" fill="#8b949e" font-size="9">Acquire real phone number</text>
+
+  <rect x="235" y="220" width="170" height="42" rx="6" fill="#161b22" stroke="#da3633" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="320" y="237" text-anchor="middle" fill="#ff7b72" font-size="11" font-weight="600">Voice OTP</text>
+  <text x="320" y="254" text-anchor="middle" fill="#8b949e" font-size="9">AI speech synthesis</text>
+
+  <rect x="50" y="272" width="170" height="42" rx="6" fill="#161b22" stroke="#da3633" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="135" y="289" text-anchor="middle" fill="#ff7b72" font-size="11" font-weight="600">Push Notification</text>
+  <text x="135" y="306" text-anchor="middle" fill="#8b949e" font-size="9">Fatigue or direct interaction</text>
+
+  <rect x="235" y="272" width="170" height="42" rx="6" fill="#161b22" stroke="#da3633" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="320" y="289" text-anchor="middle" fill="#ff7b72" font-size="11" font-weight="600">On-Screen Face ID</text>
+  <text x="320" y="306" text-anchor="middle" fill="#8b949e" font-size="9">Deepfake + camera injection</text>
+
+  <!-- Unspoofable items -->
+  <rect x="530" y="220" width="170" height="42" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="615" y="237" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="600">FIDO2 Passkeys</text>
+  <text x="615" y="254" text-anchor="middle" fill="#8b949e" font-size="9">Hardware-bound key pair</text>
+
+  <rect x="715" y="220" width="170" height="42" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="800" y="237" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="600">Device Biometric</text>
+  <text x="800" y="254" text-anchor="middle" fill="#8b949e" font-size="9">Fingerprint on secure enclave</text>
+
+  <rect x="530" y="272" width="170" height="42" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="615" y="289" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="600">Challenge-Response</text>
+  <text x="615" y="306" text-anchor="middle" fill="#8b949e" font-size="9">Crypto signed by device</text>
+
+  <rect x="715" y="272" width="170" height="42" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="800" y="289" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="600">Physical Separation</text>
+  <text x="800" y="306" text-anchor="middle" fill="#8b949e" font-size="9">Separate device from host</text>
+
+  <!-- Dividing line between columns -->
+  <line x1="450" y1="195" x2="450" y2="320" stroke="#30363d" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Bottom summary -->
+  <rect x="110" y="335" width="285" height="45" rx="6" fill="#da3633" opacity="0.08" stroke="#da3633" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="252" y="355" text-anchor="middle" fill="#ff7b72" font-size="10" font-weight="600">Agent has root on the host</text>
+  <text x="252" y="370" text-anchor="middle" fill="#8b949e" font-size="10">Software factors on the same host are compromised</text>
+
+  <rect x="510" y="335" width="285" height="45" rx="6" fill="#238636" opacity="0.08" stroke="#238636" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="652" y="355" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">Agent does NOT have the human's device</text>
+  <text x="652" y="370" text-anchor="middle" fill="#8b949e" font-size="10">Hardware-bound factors are physically unreachable</text>
+</svg>

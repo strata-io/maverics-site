@@ -18,6 +18,10 @@ tags:
 
 ---
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 10px; margin-bottom: 2rem;">
+<iframe title="MCP Server Identity Gateway Walkthrough — Claude + OPA + OAuth 2.0" width="100%" height="100%" src="https://www.youtube.com/embed/2hYY4svw7S0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>
+
 You connected Claude to an MCP server last week. Took about three minutes. `claude mcp add`, point it at a URL, maybe paste an API key into an environment variable. Tools appeared. Claude started calling them. You shipped a demo and moved on.
 
 Here is the question nobody in that room asked: **who authorized that tool call?** Not "who clicked Approve in the chat window." I mean: what system verified the identity of the user behind the agent, checked their permissions against a policy, minted a scoped token for just that operation, and logged the entire chain of custody so you could reconstruct it six months from now when compliance asks?
@@ -60,6 +64,8 @@ If your MCP server is a resource server, the architecture writes itself. You nee
 3. **A Policy Engine.** OPA (Open Policy Agent) is the natural choice here. You write Rego policies that inspect the inbound token's claims and the tool being called, and the policy engine returns allow or deny with a reason. These policies live in files. Files live in git repos. Git repos have pull requests and code review.
 
 What makes this work in practice: **tool-scoped delegation tokens with short TTLs**. When Claude calls `listAccounts` through the gateway, the gateway does not forward Claude's original access token to the backend. It exchanges that token for a new one — a delegation token scoped to `ledger:ListAccounts`, audience-restricted to the enterprise ledger service, with a five-second TTL. If that token leaks, the blast radius is one operation on one service for five seconds.
+
+![Architecture diagram showing the AI Identity Gateway between Claude and enterprise MCP servers](/img/blog/mcp-architecture-diagram.svg)
 
 ## The Stack
 
@@ -322,6 +328,8 @@ When you ask Claude to list accounts, the gateway validates the token, OPA evalu
 When you ask Claude to show PII for a customer, OPA checks for `pii:read` in the token's scope. If it's not there, OPA returns: "Access denied: PII access requires pii:read scope." Claude gets the denial message and relays it. The Enterprise Ledger never saw the request.
 
 ## The Audit Trail
+
+![Token flow diagram showing the delegation chain for enterprise_ledger_listAccounts](/img/blog/mcp-token-flow.svg)
 
 Every tool call produces an auditable delegation chain:
 

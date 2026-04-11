@@ -12,6 +12,7 @@
     "build": "npm run clean && mkdir -p .cache && gatsby build",
     "develop": "npm run clean && mkdir -p .cache && gatsby develop",
     "develop:fast": "gatsby develop",
+    "cms": "npx decap-server",
     "serve": "gatsby serve",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },

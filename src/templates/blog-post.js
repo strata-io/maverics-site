@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { kebabCase } from "lodash";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
@@ -105,9 +106,7 @@ const BlogPostTemplate = ({
                 <Link
                   key={tag}
                   className="blog-tag-link"
-                  to={`/tags/${tag
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}/`}
+                  to={`/tags/${kebabCase(tag)}/`}
                 >
                   {tag}
                 </Link>

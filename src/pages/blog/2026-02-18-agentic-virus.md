@@ -34,6 +34,8 @@ None of this required a sophisticated attacker. It required curiosity and a tren
 
 Traditional malware follows a predictable lifecycle: delivery, exploitation, installation, command and control, actions on objectives. An AI-agent-based virus follows the same structure but replaces static payloads with an autonomous reasoning engine. It doesn't execute a fixed script. It reads its environment, makes decisions, and adapts. Here's what that looks like across four phases.
 
+![Agentic Virus Lifecycle — four phases from installation to persistence](/img/blog/virus-lifecycle.svg)
+
 ### Phase 1: Installation via Social Engineering
 
 The attacker doesn't need to break into your network. They need to put a project on GitHub and make it go viral. This isn't theoretical.
