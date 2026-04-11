@@ -80,6 +80,8 @@ This model ensures that when agents access protected resources, they operate wit
 
 The AI Gateway centrally manages token validation, dynamic downscoping, and fine-grained authorization through an embedded Open Policy Agent (OPA) engine.
 
+![The Identity Fabric — Maverics AI Gateway manages authentication, token exchange, and policy enforcement across users, agents, and MCP servers](/img/blog/securing-mcp-identity-fabric.png)
+
 **Key takeaway:** The AI Identity Gateway is the single identity fabric hub. All authentication flows through it. When agents attempt to access protected resources (like MCP servers), the AI Identity Gateway dynamically mints ephemeral, task-scoped tokens that collapse the reachable state space to only what's needed for that specific access, and OPA policies enforce fine-grained authorization based on runtime execution context. Applications never need to know which IDP you're using.
 
 ## Next Steps

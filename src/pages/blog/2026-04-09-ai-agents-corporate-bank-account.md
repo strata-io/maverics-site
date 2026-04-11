@@ -44,6 +44,8 @@ The fun part: a human can log in via Keycloak and their authority level becomes 
 
 The stack: 4x GoClaw containers (~35MB RAM each), Maverics AI Identity Gateway, Maverics Auth (OIDC Provider), Keycloak (human authentication), Finance API (Express service), Messaging Service (in-memory), OPA (policy engine), Loki + Promtail + Grafana (audit), n8n (workflow automation), LLM Egress Proxy (nginx SNI allowlist), React Control Room (2x2 agent chat grid). That's ~20 containers, 4 isolated Docker networks, and a lot of YAML.
 
+![Build Log: Project ClawControl — Multi-Agent AI Identity System architecture](/img/blog/bank-account-architecture.png)
+
 ## Part 1: Making Agents Talk to APIs Through an Identity Gateway
 
 The core architectural decision: agents cannot reach enterprise APIs directly. They live on agent-net. The Finance API lives on enterprise-net. There's no route between them. The only path is through the Maverics AI Identity Gateway.

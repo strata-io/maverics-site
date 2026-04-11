@@ -110,6 +110,8 @@ A swarm of agentic copies can divide labor. Some run reconnaissance. Some exfilt
 
 The swarm can also share intelligence. Credentials harvested by one copy propagate to every other copy. A vulnerability discovered on one host is exploited across every host the swarm can reach. And if the attacker wants to use the swarm as a deliberate weapon, it can coordinate a focused assault on a specific target while a subset of copies quietly continues the real objective: exfiltrating data under the cover of the chaos.
 
+![Lateral spread across hosts and cloud instances, with C2 exfiltration](/img/blog/virus-lateral-spread.png)
+
 ## The MFA Problem: When the Virus Fights Back
 
 At this point, a reasonable response is: "The model's safety guardrails would prevent this. We have endpoint detection. We have MFA. We'll catch it." Let's examine each of these.
@@ -148,6 +150,8 @@ The core insight is this: you cannot reliably prevent people from installing exp
 
 The question isn't "how do we stop installation?" It's "how do we protect the resources the virus will try to access?"
 
+![Traditional MFA factors compromised by an AI agent; hardware biometric remains unreachable](/img/blog/virus-mfa-under-siege.png)
+
 ## The AI Identity Gateway as Immune System
 
 This is where the mental model shifts. If you think of security as a perimeter around your hosts, you've already lost. The virus is inside the perimeter the moment a user runs `docker compose up`. Endpoint detection sees normal user behavior. Network monitoring sees legitimate credentials in use.
@@ -157,6 +161,8 @@ Instead, think of security as a layer around your resources. APIs. MCP servers. 
 The virus can compromise all the hosts it wants. When it tries to use what it found -- when it calls an API, connects to an MCP server, queries a database through a protected endpoint -- it hits the gateway.
 
 This is what the Maverics AI Identity Gateway does. It sits between agents and resources, enforcing authentication, authorization, and audit for every interaction.
+
+![AI Identity Gateway Architecture](/img/blog/virus-gateway-architecture.svg)
 
 ### How It Works in Practice
 
@@ -312,6 +318,8 @@ And that's where the kill switch comes in.
 ## Human-in-the-Loop: The Kill Switch
 
 The single most effective policy against agentic spread is human-in-the-loop (HITL) authorization.
+
+![Human-in-the-Loop Flow](/img/blog/virus-hitl-flow.svg)
 
 Here's the concept: when an agent attempts a sensitive action through the gateway -- creating a resource, accessing PII, modifying a configuration -- the OPA policy doesn't just check whether the token is valid. It requires the human principal to actively verify the action.
 
