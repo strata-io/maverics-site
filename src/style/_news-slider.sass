@@ -1,93 +1,106 @@
-// News slider styles
+// News slider — matched to production
 .mav-news
   background-color: $mav-bg-primary
   padding: 4rem 2rem
 
-  .news-header
+  .ai-news-slider-header
     display: flex
     justify-content: space-between
-    align-items: flex-end
+    align-items: center
+    margin-bottom: 40px
     max-width: 1200px
-    margin: 0 auto 2rem
+    margin-left: auto
+    margin-right: auto
 
-    .news-header-left
-      h2
-        font-size: 0.85rem
-        color: $mav-accent
-        text-transform: uppercase
-        letter-spacing: 0.1em
-        font-weight: 600
-        margin-bottom: 0.5rem
-      p
-        font-size: 1.5rem
-        font-weight: 700
-        color: $mav-text-primary
+  .ai-news-slider-header-left
+    width: calc(100% - 140px)
+    h4
+      font-size: 20px
+      color: $mav-text-primary
+      margin: 0
 
-    .news-nav
-      display: flex
-      gap: 0.5rem
-      button
-        background: rgba(255, 255, 255, 0.1)
-        border: 1px solid $mav-border
-        color: $mav-text-primary
-        width: 40px
-        height: 40px
-        border-radius: 50%
-        cursor: pointer
-        display: flex
-        align-items: center
-        justify-content: center
-        transition: all 0.2s ease
-        &:hover
-          border-color: $mav-accent
-          color: $mav-accent
+  .ai-news-slider-header-right
+    width: 140px
+    display: flex
+    justify-content: flex-end
+    gap: 20px
+
+  .slider-nav-btn
+    display: block
+    background-color: #000
+    background-repeat: no-repeat
+    background-position: center center
+    border: 2px solid #FFF
+    width: 58px
+    height: 58px
+    border-radius: 29px
+    cursor: pointer
+    transition: all 0.2s ease-in-out
+    &.prev-btn
+      background-image: url('/img/nav/slider-left.svg')
+    &.next-btn
+      background-image: url('/img/nav/slider-right.svg')
+    &:hover
+      border-color: $mav-accent
+      background-color: $mav-accent
 
   .news-slider
     max-width: 1200px
     margin: 0 auto
+    overflow: visible
+
+  // Slick overrides
+  .slick-list
+    overflow: visible
+  .slick-slide
+    margin-right: 20px
 
   .news-card
-    padding: 0 0.5rem
+    .news-card-image
+      height: 220px
+      background-position: center center
+      background-size: cover
+      border-radius: 12px 12px 0 0
+      position: relative
+      overflow: hidden
 
-    .news-card-inner
-      background: rgba(255, 255, 255, 0.03)
-      border: 1px solid $mav-border
-      border-radius: 12px
-      padding: 1.5rem
-      height: 100%
-      transition: all 0.3s ease
-
-      &:hover
-        border-color: rgba($mav-accent, 0.3)
-
-    .news-category
-      display: inline-block
+    .post-cat-meta-item
+      position: absolute
+      bottom: 12px
+      left: 12px
       background-color: $mav-accent
       color: $mav-bg-primary
-      font-size: 0.7rem
+      font-size: 12px
       font-weight: 600
-      padding: 0.2rem 0.6rem
+      padding: 4px 10px
       border-radius: 4px
-      margin-bottom: 0.75rem
+      z-index: 3
 
-    h3
-      font-size: 1rem
-      font-weight: 600
-      color: $mav-text-primary
-      margin-bottom: 0.75rem
+    .post-title-mask
+      position: absolute
+      left: 0
+      bottom: 0
+      width: 100%
+      height: 60px
+      z-index: 2
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)
+
+    .news-card-content
+      padding: 26px
+      background: rgba(255, 255, 255, 0.03)
+      border: 1px solid rgba(255, 255, 255, 0.08)
+      border-top: none
+      border-radius: 0 0 12px 12px
+
+    .news-card-title
+      font-size: 19px
+      display: block
+      color: #FFF
+      font-weight: 700
+      margin-bottom: 10px
       line-height: 1.4
 
-    p
+    .news-card-excerpt
       color: $mav-text-secondary
-      font-size: 0.85rem
+      font-size: 14px
       line-height: 1.6
-
-// Slick slider overrides
-.slick-track
-  display: flex
-  gap: 0
-
-.slick-slide
-  height: auto
-  > div
-    height: 100%

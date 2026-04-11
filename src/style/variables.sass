@@ -1,26 +1,35 @@
-// Maverics Dark Theme Colors
-$mav-bg-primary: #0A0A0A
+// Maverics Production Design System
+$mav-bg-primary: #050B11
 $mav-bg-secondary: #111111
 $mav-bg-surface: #1A1A1A
-$mav-accent: #00BFA6
-$mav-accent-light: #33CFBB
-$mav-accent-dark: #009688
+$mav-accent: #00CFC7
+$mav-accent-hover: #0AE4DC
+$mav-accent-dark: #00837D
+$mav-purple: #831485
 $mav-text-primary: #FFFFFF
 $mav-text-secondary: #B0B0B0
-$mav-text-muted: #666666
-$mav-border: #222222
+$mav-text-body: #525567
+$mav-text-dark: #2E3147
+$mav-text-muted: #5C5F71
+$mav-border: #555555
 $mav-orange-border: #D4632A
+$mav-footer-link: #c9c9ce
 
-// Bulma variable overrides (must come before Bulma import)
+// Font families
+$font-body: "Open Sans", Helvetica, Arial, sans-serif
+$font-button: "Montserrat", sans-serif
+$font-title: "Electrolize", sans-serif
+
+// Bulma overrides
 $body-background-color: $mav-bg-primary
 $background: $mav-bg-primary
 $text: $mav-text-primary
 $text-strong: $mav-text-primary
 $link: $mav-accent
-$link-hover: $mav-accent-light
+$link-hover: $mav-accent-hover
 $primary: $mav-accent
 $info: $mav-accent
-$family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif
+$family-sans-serif: $font-body
 $navbar-background-color: transparent
 $navbar-item-color: $mav-text-primary
 $footer-background-color: $mav-bg-secondary

@@ -6,6 +6,7 @@ import SEO from "../components/SEO";
 import FeaturesGrid from "../components/FeaturesGrid";
 import IndustrySolutions from "../components/IndustrySolutions";
 import NewsSlider from "../components/NewsSlider";
+import MeshGradient from "../components/MeshGradient";
 
 export const IndexPageTemplate = ({
   heading,
@@ -18,8 +19,9 @@ export const IndexPageTemplate = ({
 }) => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="mav-hero">
+      {/* Hero Section with Mesh Gradient */}
+      <section className="mav-hero" style={{ position: "relative", overflow: "hidden" }}>
+        <MeshGradient />
         <div className="hero-logo">
           <img
             src="/img/maverics-hero-logo.webp"
@@ -30,7 +32,7 @@ export const IndexPageTemplate = ({
         <p className="hero-description">{description}</p>
         {ctaLink && (
           <Link to={ctaLink} className="hero-cta">
-            ✨ {ctaText || "Try the Sandbox"}
+            &#10024; {ctaText || "Try the Sandbox"}
           </Link>
         )}
         <div className="hero-screenshot">
@@ -42,14 +44,14 @@ export const IndexPageTemplate = ({
         </div>
       </section>
 
-      {/* Problem Statement Section — 3 columns matching production */}
+      {/* Problem Statement Section — 3 columns */}
       <section className="mav-problem-section">
         <div className="problem-heading">
           <h2>
             Don&apos;t let the identity gap hold you back from deploying AI
             agents securely and confidently to production.
           </h2>
-          <p>
+          <p className="font-size-20">
             AI agents operate autonomously but lack essential identity controls.
             Without zero trust authentication, access control and
             human-in-the-loop authorization, agents run uncontrolled.
@@ -74,14 +76,14 @@ export const IndexPageTemplate = ({
             <h5>Identity Orchestration for Agents</h5>
             <p>
               Strata&apos;s Identity Orchestration for Agents solves these
-              challenges through our proven enterprise hybrid platform –
+              challenges through our proven enterprise hybrid platform &ndash;
               Maverics.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Gartner Quote Section — full-width card matching production */}
+      {/* Gartner Quote — blur-quote-box */}
       <section style={{ background: "#050B11", padding: "0 2rem 4rem" }}>
         <div className="blur-quote-box">
           <p style={{ marginBottom: "1.5rem" }}>
@@ -98,7 +100,13 @@ export const IndexPageTemplate = ({
             crucial for realizing the benefits of agentic AI in a secure and
             responsible manner.&rdquo;
           </h4>
-          <p className="gartner-citation">
+          <p className="gartner-citation" style={{
+            color: "#5c5f71",
+            fontSize: "13px",
+            fontStyle: "italic",
+            marginTop: "1.5rem",
+            lineHeight: "1.5em",
+          }}>
             Gartner, IAM for LLM-Based AI Agents, Homan Farahmand, 12 June 2025
             <br />
             GARTNER is a registered trademark and service mark of Gartner, Inc.
@@ -111,51 +119,47 @@ export const IndexPageTemplate = ({
       {/* Features */}
       <FeaturesGrid features={features} />
 
-      {/* Field Guide CTA */}
-      <section
-        style={{
-          background: "#0A0A0A",
-          padding: "5rem 2rem",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
+      {/* Field Guide — blur-box-one with 7/5 split */}
+      <section style={{ background: "#050B11", padding: "4rem 2rem" }}>
+        <div className="blur-box-one">
+          <div style={{
             display: "flex",
             alignItems: "center",
-            gap: "4rem",
+            gap: "3rem",
             flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          <div style={{ flex: "1", minWidth: "300px" }}>
-            <Link to="/labs/agentic-ai-sandbox/" className="hero-cta">
-              Try the Sandbox
-            </Link>
-            <h2 style={{ fontSize: "2rem", marginTop: "1.5rem", marginBottom: "1rem" }}>
-              From chaos to control: A field guide to AI agent identity
-            </h2>
-            <p style={{ color: "#B0B0B0", lineHeight: "1.7", marginBottom: "1.5rem" }}>
-              Autonomous agents are multiplying across your environment — but do
-              you know what they&apos;re doing, who they&apos;re acting for, or
-              what they&apos;re allowed to access?
-            </p>
-            <a
-              href="https://www.strata.io/resources/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-button"
-            >
-              Get the field guide
-            </a>
-          </div>
-          <div style={{ flex: "0 0 250px" }}>
-            <img
-              src="/img/field-guide-book.png"
-              alt="AI Agent Identity Field Guide"
-              style={{ width: "100%", borderRadius: "8px" }}
-            />
+          }}>
+            <div style={{ flex: "1 1 58%", minWidth: "300px" }}>
+              <h2>
+                From chaos to control:<br />
+                A field guide to AI agent identity
+              </h2>
+              <p className="font-size-20">
+                Autonomous agents are multiplying across your environment &mdash; but
+                do you know what they&apos;re doing, who they&apos;re acting
+                for, or what they&apos;re allowed to access?
+              </p>
+              <a
+                className="strata-btn1"
+                href="https://www.strata.io/resources/whitepapers/field-guide-to-ai-agent-identity/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get the field guide
+              </a>
+            </div>
+            <div style={{ flex: "0 0 300px", textAlign: "center" }}>
+              <a
+                href="https://www.strata.io/resources/whitepapers/field-guide-to-ai-agent-identity/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/img/field-guide-book.png"
+                  alt="AI Agent Identity Field Guide"
+                  style={{ width: "362px", maxWidth: "100%", height: "auto" }}
+                />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -163,51 +167,65 @@ export const IndexPageTemplate = ({
       {/* Industry Solutions */}
       <IndustrySolutions solutions={solutions} />
 
-      {/* CTA Section */}
-      <section className="mav-cta-section">
-        <h2>Ready to secure the future of identity for AI agents?</h2>
-        <p>
-          Orchestrate runtime identity security for AI Agents. Enforce Agent
-          zero trust delegated authorization to MCP resources.
-        </p>
-        <Link to="/labs/agentic-ai-sandbox/" className="cta-button">
-          Try the Sandbox
-        </Link>
+      {/* Ready to Secure CTA — blur-box-two */}
+      <section style={{ background: "#050B11", padding: "4rem 2rem" }}>
+        <div className="blur-box-two">
+          <h2 style={{ textAlign: "center" }}>
+            Ready to secure the future of identity for AI agents?
+          </h2>
+          <p className="font-size-20" style={{ textAlign: "center" }}>
+            Orchestrate runtime identity security for AI Agents. Enforce Agent
+            zero trust delegated authorization to MCP resources.
+          </p>
+          <p style={{ textAlign: "center" }}>
+            <Link className="strata-btn2" to="/labs/agentic-ai-sandbox/">
+              Try the Sandbox
+            </Link>
+          </p>
+        </div>
       </section>
 
-      {/* Delegated Auth Section */}
-      <section
-        style={{
-          background: "#0A0A0A",
-          padding: "5rem 2rem",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-        >
-          <h2 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>
-            Secure delegated AI actions with policy, context, and full
-            auditability
-          </h2>
-          <p
-            style={{
-              color: "#B0B0B0",
-              lineHeight: "1.7",
-              marginBottom: "2rem",
-            }}
-          >
-            From issuing refunds to making purchases, AI agents increasingly act
-            on-behalf-of users and other systems. However, legacy IAM can&apos;t
-            trace who delegated what, or enforce fine-grained policies during
-            execution.
-          </p>
-          <Link to="/labs/agentic-ai-sandbox/" className="cta-button">
-            Try the Sandbox
-          </Link>
+      {/* Secure Delegated AI Actions — if-row with image */}
+      <section className="if-row" style={{ padding: "160px 2rem 100px" }}>
+        <div style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          gap: "3rem",
+          flexWrap: "wrap",
+        }}>
+          <div style={{ flex: "1 1 50%", minWidth: "300px", paddingRight: "40px" }}>
+            <h2>
+              Secure delegated AI actions with policy, context, and full
+              auditability
+            </h2>
+            <p>
+              From issuing refunds to making purchases, AI agents increasingly
+              act on-behalf-of users and other systems. However, legacy IAM
+              can&apos;t trace who delegated what, or enforce fine-grained
+              policies during execution.
+            </p>
+            <p>
+              With Maverics: Secure every agent workflow with delegated identity,
+              runtime access enforcement, and contextual policy evaluation.
+              Support OAuth 2.0 On-Behalf-Of (OBO), Demonstration of Proof of
+              Possession (DPoP), and attribute-based authorization at the API
+              layer. Ensure each action is logged, scoped, and auditable.
+            </p>
+            <p>
+              <Link className="strata-btn9" to="/labs/agentic-ai-sandbox/">
+                Try the Sandbox
+              </Link>
+            </p>
+          </div>
+          <div style={{ flex: "1 1 50%", minWidth: "300px" }}>
+            <img
+              src="/img/agent-fabric.webp"
+              alt="Agent Identity Fabric"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
         </div>
       </section>
 

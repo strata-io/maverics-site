@@ -15,7 +15,7 @@ const NewsSlider = ({ items }) => {
     infinite: false,
     speed: 500,
     swipeToSlide: true,
-    slidesToShow: 3.5,
+    slidesToShow: 3.75,
     slidesToScroll: 1,
     responsive: [
       {
@@ -35,36 +35,44 @@ const NewsSlider = ({ items }) => {
 
   return (
     <section className="mav-news">
-      <div className="news-header">
-        <div className="news-header-left">
-          <h2>RECENT NEWS</h2>
-          <p>Learn why the identity layer for agentic AI is making waves</p>
+      <div className="ai-news-slider-header">
+        <div className="ai-news-slider-header-left">
+          <div className="strata-section-title">RECENT NEWS</div>
+          <h4>Learn why the identity layer for agentic AI is making waves</h4>
         </div>
-        <div className="news-nav">
+        <div className="ai-news-slider-header-right">
           <button
+            className="slider-nav-btn prev-btn"
             onClick={() => sliderRef.current?.slickPrev()}
             aria-label="Previous"
-          >
-            &#8592;
-          </button>
+          />
           <button
+            className="slider-nav-btn next-btn"
             onClick={() => sliderRef.current?.slickNext()}
             aria-label="Next"
-          >
-            &#8594;
-          </button>
+          />
         </div>
       </div>
       <div className="news-slider">
         <Slider ref={sliderRef} {...settings}>
           {items.map((item, index) => (
             <div key={index} className="news-card">
-              <div className="news-card-inner">
-                <span className="news-category">
+              <div
+                className="news-card-image"
+                style={{
+                  backgroundImage: item.image ? `url(${item.image})` : "none",
+                }}
+              >
+                <span className="post-cat-meta-item">
                   {item.category || "Agentic Identity"}
                 </span>
-                <h3>{item.title}</h3>
-                <p>{item.excerpt}</p>
+                <div className="post-title-mask" />
+              </div>
+              <div className="news-card-content">
+                <span className="news-card-title">{item.title}</span>
+                {item.excerpt && (
+                  <p className="news-card-excerpt">{item.excerpt}</p>
+                )}
               </div>
             </div>
           ))}
@@ -80,6 +88,7 @@ NewsSlider.propTypes = {
       title: PropTypes.string.isRequired,
       excerpt: PropTypes.string,
       category: PropTypes.string,
+      image: PropTypes.string,
     })
   ),
 };

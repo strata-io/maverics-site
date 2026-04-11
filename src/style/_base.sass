@@ -1,32 +1,101 @@
-// Base styles
+// Base styles matched to production
 html
   background-color: $mav-bg-primary
 
 body
   background-color: $mav-bg-primary
   color: $mav-text-primary
-  font-family: $family-sans-serif
+  font: 16px/1.6em $font-body
+  letter-spacing: 0.1px
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
-h1, h2, h3, h4, h5, h6
-  color: $mav-text-primary
+h1
+  font-family: $font-body
   font-weight: 700
+  font-size: 48px
+  line-height: 1.1em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
+  letter-spacing: -2px
+
+h2
+  font-family: $font-body
+  font-weight: normal
+  font-size: 32px
+  line-height: 1.3em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
+  letter-spacing: -0.5px
+
+h3
+  font-family: $font-body
+  font-weight: normal
+  font-size: 24px
+  line-height: 1.4em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
+
+h4
+  font-family: $font-body
+  font-weight: normal
+  font-size: 20px
+  line-height: 1.6em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
+
+h5
+  font-family: $font-body
+  font-weight: normal
+  font-size: 28px
+  line-height: 1.6em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
+
+h6
+  font-family: $font-body
+  font-weight: normal
+  font-size: 18px
+  line-height: 1.1em
+  color: $mav-text-primary
+  margin: 0 0 20px 0
 
 a
   color: $mav-accent
-  transition: color 0.2s ease
+  transition: all 0.2s ease-in-out
   &:hover
-    color: $mav-accent-light
+    color: $mav-accent-hover
 
 ::selection
   background-color: rgba($mav-accent, 0.3)
   color: $mav-text-primary
 
-// Section defaults
 .section
   background-color: $mav-bg-primary
 
-// Container max-width
 .container
   max-width: 1200px
+
+// Utility classes from production
+.font-size-20
+  font-size: 20px
+  line-height: 1.5em
+
+.pt30
+  padding-top: 30px
+.pt60
+  padding-top: 60px
+.pt90
+  padding-top: 90px
+.pt160
+  padding-top: 160px
+.pb50
+  padding-bottom: 50px
+.pb70
+  padding-bottom: 70px
+.pb100
+  padding-bottom: 100px
+.pl60
+  padding-left: 60px
+.pr40
+  padding-right: 40px

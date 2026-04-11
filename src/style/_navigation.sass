@@ -1,4 +1,4 @@
-// Navigation styles — matched to production
+// Navigation — matched to production
 .navbar
   position: fixed !important
   top: 0
@@ -9,7 +9,7 @@
   background: none
   display: flex
   align-items: center
-  padding: 0 2rem
+  padding: 0 4%
   transition: all 0.2s ease-in-out
 
   &.scroll-header
@@ -18,72 +18,194 @@
     backdrop-filter: blur(8px)
     transition: all 0.75s ease-in-out
 
-.navbar-brand
-  .navbar-item
-    padding: 0.5rem 0
+  .navbar-brand
+    display: flex
+    align-items: center
     img
-      max-height: 2.5rem
+      max-height: 38px
 
-.navbar-item
-  color: $mav-text-primary
-  font-size: 0.95rem
+  .navbar-nav
+    display: flex
+    align-items: center
+    list-style: none
+    margin: 0
+    padding: 0
+    margin-left: 40px
+
+  .nav-item
+    position: relative
+    margin-right: 10px
+
+    > a, > span
+      color: #FFF
+      font-family: $font-button
+      font-size: 14px
+      font-weight: 600
+      letter-spacing: 0.5px
+      padding: 10px 15px
+      cursor: pointer
+      transition: all 0.2s ease-in-out
+      text-decoration: none
+      display: inline-flex
+      align-items: center
+
+      &:hover
+        color: $mav-accent
+
+      .nav-arrow
+        margin-left: 6px
+        font-size: 10px
+        transition: transform 0.2s
+
+    &:hover .mega-menu
+      display: flex
+      opacity: 1
+      transform: translateY(0)
+
+// Mega-menu base
+.mega-menu
+  display: none
+  opacity: 0
+  transform: translateY(10px)
+  position: absolute
+  top: 100%
+  background: #FFF
+  border-radius: 12px
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3)
+  padding: 20px 0
+  z-index: 200
+  transition: opacity 0.2s, transform 0.2s
+
+  &.mega-menu-platform
+    width: 460px
+    left: -175px
+
+  &.mega-menu-solutions
+    width: 290px
+    left: -86px
+
+  &.mega-menu-wide
+    width: 900px
+    left: -395px
+
+.mega-left
+  width: 350px
+  padding: 0
+
+.mega-right
+  width: 550px
+  padding: 10px 20px
+  img
+    border-radius: 5px
+    margin-bottom: 16px
+    width: 100%
+    transition: all 0.2s ease-in-out
+  a:hover img
+    opacity: 0.8
+
+.mega-link-top
+  color: $mav-accent
+  font-weight: 800
+  text-transform: uppercase
+  font-size: 14px
+  font-family: $font-title
+  letter-spacing: 1px
+  margin-bottom: 14px
+  margin-top: 7px
+  padding-left: 20px
+
+.menu-purple-link
+  display: block
+  padding: 8px 20px
+  color: $mav-text-dark
+  font-size: 14px
+  font-family: $font-button
   font-weight: 500
-  &:hover
-    color: $mav-accent
-    background-color: transparent
-
-.navbar-link
-  color: $mav-text-primary
-  &:hover
-    color: $mav-accent
-    background-color: transparent
-  &::after
-    border-color: $mav-text-secondary
-
-.navbar-dropdown
-  background-color: $mav-bg-surface
-  border: 1px solid $mav-border
-  border-radius: 8px
-  border-top: 2px solid $mav-accent
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4)
-  padding: 0.5rem 0
-  .navbar-item
-    color: $mav-text-primary
-    padding: 0.5rem 1.5rem
-    &:hover
-      background-color: rgba($mav-accent, 0.1)
-      color: $mav-accent
-
-.navbar-cta
-  background-color: transparent
-  border: 1px solid $mav-text-secondary
-  border-radius: 50px
-  color: $mav-text-primary
-  padding: 0.4rem 1.5rem
-  font-size: 0.9rem
-  font-weight: 500
-  transition: all 0.2s ease
+  transition: all 0.2s ease-in-out
   text-decoration: none
-  display: inline-flex
-  align-items: center
+  img.nav-icon
+    width: 22px
+    height: 22px
+    margin-right: 12px
+    vertical-align: middle
+  .menu-right-icon
+    width: 10px
+    height: 10px
+    margin-left: 8px
+    opacity: 0.4
   &:hover
-    border-color: $mav-accent
+    background: rgba(0, 207, 199, 0.08)
     color: $mav-accent
 
-.navbar-burger
-  color: $mav-text-primary
-  span
-    background-color: $mav-text-primary
-    height: 2px
+.menu-purple-link-text-content
+  font-size: 13px
+  color: #666
+  margin-left: 0
+  margin-bottom: 14px
+  padding: 0 20px
 
-// Mobile menu
+// Header CTA button
+.header-button
+  background: #FFF
+  color: $mav-accent-dark
+  padding: 8px 18px 7px 18px
+  display: inline-block
+  border-radius: 21px
+  font-family: $font-button
+  letter-spacing: 0.5px
+  font-weight: 600
+  font-size: 14px
+  position: absolute
+  right: 4%
+  top: 28px
+  z-index: 10
+  transition: all 0.75s ease-in-out
+  margin-top: 17px
+  text-decoration: none
+  &:hover
+    color: #000
+    background-color: #00F2E9
+
+.scroll-header .header-button
+  margin-top: 0 !important
+  top: 18px
+
+// Hamburger
+.navbar-burger
+  display: none
+  color: $mav-text-primary
+  background: none
+  border: none
+  cursor: pointer
+  padding: 10px
+  span
+    display: block
+    width: 24px
+    height: 2px
+    background-color: $mav-text-primary
+    margin: 5px 0
+
 @media screen and (max-width: 1023px)
-  .navbar-menu
-    background-color: $mav-bg-surface
-    padding: 1rem
-    &.is-active
+  .navbar-nav
+    display: none
+  .header-button
+    right: 70px
+  .navbar-burger
+    display: block
+    position: absolute
+    right: 20px
+  .navbar-menu-mobile
+    display: block
+    position: fixed
+    top: 76px
+    left: 0
+    right: 0
+    background: rgba(0, 0, 0, 0.95)
+    padding: 20px
+    z-index: 200
+    a
       display: block
-  .navbar-dropdown
-    background-color: transparent
-    border: none
-    box-shadow: none
+      color: #FFF
+      padding: 10px 20px
+      font-family: $font-button
+      font-size: 14px
