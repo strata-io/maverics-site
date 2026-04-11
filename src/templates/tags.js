@@ -11,54 +11,60 @@ const TagRoute = ({ data, pageContext }) => {
   return (
     <Layout>
       <Helmet title={`${tag} | Maverics Blog`} />
-      <section
-        style={{
-          background: "#0A0A0A",
-          padding: "6rem 2rem 2rem",
-          textAlign: "center",
-        }}
-      >
-        <h1 style={{ color: "#FFFFFF", fontSize: "2rem" }}>
-          {totalCount} post{totalCount === 1 ? "" : "s"} tagged with &ldquo;{tag}&rdquo;
-        </h1>
-        <Link
-          to="/blog/"
-          style={{
-            color: "#00BFA6",
-            marginTop: "1rem",
-            display: "inline-block",
-          }}
-        >
-          &larr; Browse all posts
-        </Link>
-      </section>
-      <section style={{ background: "#F5F5F5", padding: "3rem 2rem" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      <div className="blog-listing">
+        <div className="blog-listing-header blog-tag-header">
+          <p className="blog-tag-label">Tag</p>
+          <h1>{tag}</h1>
+          <p>
+            {totalCount} post{totalCount === 1 ? "" : "s"} tagged with &ldquo;
+            {tag}&rdquo;
+          </p>
+          <Link to="/blog/" className="blog-tag-back">
+            &larr; Browse all posts
+          </Link>
+        </div>
+        <div className="blog-grid">
           {posts.map(({ node: post }) => (
-            <div
+            <Link
               key={post.id}
-              style={{
-                background: "#FFFFFF",
-                padding: "1.5rem",
-                borderRadius: "8px",
-                marginBottom: "1rem",
-              }}
+              className="blog-card"
+              to={post.fields.slug}
             >
-              <Link
-                to={post.fields.slug}
-                style={{ color: "#1a1a1a", textDecoration: "none" }}
-              >
-                <h3 style={{ marginBottom: "0.5rem" }}>
+              <div className="blog-card-image">
+                {post.frontmatter.featuredimage ? (
+                  <img
+                    src={post.frontmatter.featuredimage}
+                    alt={post.frontmatter.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #111827, #0A0A0A)",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                )}
+                <span className="blog-card-category">
+                  {post.frontmatter.category || "Agentic Identity"}
+                </span>
+              </div>
+              <div className="blog-card-content">
+                <h3 className="blog-card-title">
                   {post.frontmatter.title}
                 </h3>
-                <p style={{ color: "#666", fontSize: "0.9rem" }}>
-                  {post.frontmatter.date}
-                </p>
-              </Link>
-            </div>
+                <p className="blog-card-excerpt">{post.excerpt}</p>
+              </div>
+            </Link>
           ))}
         </div>
-      </section>
+      </div>
     </Layout>
   );
 };
@@ -75,6 +81,7 @@ export const tagPageQuery = graphql`
       totalCount
       edges {
         node {
+          excerpt(pruneLength: 150)
           id
           fields {
             slug
@@ -82,6 +89,8 @@ export const tagPageQuery = graphql`
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
+            category
+            featuredimage
           }
         }
       }
