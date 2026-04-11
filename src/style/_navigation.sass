@@ -1,17 +1,22 @@
-// Navigation styles
+// Navigation styles — matched to production
 .navbar
-  background-color: transparent
-  position: relative
+  position: fixed !important
+  top: 0
+  left: 0
+  width: 100%
   z-index: 100
-  padding: 0.5rem 1rem
-  border-bottom: 1px solid rgba($mav-border, 0.5)
+  height: 110px
+  background: none
+  display: flex
+  align-items: center
+  padding: 0 2rem
+  transition: all 0.2s ease-in-out
 
-  &.is-fixed-top
-    position: fixed
-    width: 100%
-    top: 0
-    background-color: rgba($mav-bg-primary, 0.95)
-    backdrop-filter: blur(10px)
+  &.scroll-header
+    height: 76px
+    background: rgba(0, 0, 0, 0.7)
+    backdrop-filter: blur(8px)
+    transition: all 0.75s ease-in-out
 
 .navbar-brand
   .navbar-item

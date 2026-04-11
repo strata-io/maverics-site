@@ -24,10 +24,9 @@ export const IndexPageTemplate = ({
           <img
             src="/img/maverics-hero-logo.webp"
             alt="Maverics"
-            style={{ maxWidth: "600px", width: "100%", height: "auto" }}
           />
         </div>
-        <h2 className="hero-heading">{heading}</h2>
+        <h1 className="hero-heading">{heading}</h1>
         <p className="hero-description">{description}</p>
         {ctaLink && (
           <Link to={ctaLink} className="hero-cta">
@@ -39,74 +38,73 @@ export const IndexPageTemplate = ({
             src="/img/maverics-screenshot.webp"
             alt="Maverics Console"
           />
+          <div className="hero-bottom-mask" />
         </div>
       </section>
 
-      {/* Gap section */}
-      <section
-        style={{
-          background: "#0A0A0A",
-          padding: "3rem 2rem",
-          textAlign: "center",
-        }}
-      >
-        <p
-          style={{
-            color: "#B0B0B0",
-            maxWidth: "800px",
-            margin: "0 auto",
-            fontSize: "1.1rem",
-            lineHeight: "1.7",
-          }}
-        >
-          Don&apos;t let the identity gap hold you back from deploying AI agents
-          securely and confidently to production.
-        </p>
+      {/* Problem Statement Section — 3 columns matching production */}
+      <section className="mav-problem-section">
+        <div className="problem-heading">
+          <h2>
+            Don&apos;t let the identity gap hold you back from deploying AI
+            agents securely and confidently to production.
+          </h2>
+          <p>
+            AI agents operate autonomously but lack essential identity controls.
+            Without zero trust authentication, access control and
+            human-in-the-loop authorization, agents run uncontrolled.
+          </p>
+        </div>
+        <div className="problem-columns">
+          <div>
+            <h5>End-to-end observability</h5>
+            <p>
+              Without end-to-end observability, agents create shadow access and
+              risk.
+            </p>
+          </div>
+          <div>
+            <h5>On-premises deployment</h5>
+            <p>
+              Without on-premises deployment, agents can&apos;t access core
+              systems that can&apos;t migrate to the cloud.
+            </p>
+          </div>
+          <div>
+            <h5>Identity Orchestration for Agents</h5>
+            <p>
+              Strata&apos;s Identity Orchestration for Agents solves these
+              challenges through our proven enterprise hybrid platform –
+              Maverics.
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Gartner Quote Section */}
-      <section
-        style={{
-          background: "#0A0A0A",
-          padding: "4rem 2rem",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            textAlign: "center",
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "16px",
-            padding: "3rem 2.5rem",
-          }}
-        >
-          <p
-            style={{
-              color: "#B0B0B0",
-              fontSize: "1rem",
-              lineHeight: "1.8",
-              fontStyle: "italic",
-              marginBottom: "1.5rem",
-            }}
-          >
-            &ldquo;A unified model that extends established IAM principles and
-            protocols to AI agents, while also fostering interoperability between
-            different AI platforms, is crucial for realizing the benefits of
-            agentic AI in a secure and responsible manner.&rdquo;
-          </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+      {/* Gartner Quote Section — full-width card matching production */}
+      <section style={{ background: "#050B11", padding: "0 2rem 4rem" }}>
+        <div className="blur-quote-box">
+          <p style={{ marginBottom: "1.5rem" }}>
             <img
               src="/img/gartner-logo.svg"
               alt="Gartner"
-              style={{ height: "24px", opacity: 0.7 }}
+              style={{ width: "144px", height: "auto" }}
             />
-            <span style={{ color: "#666", fontSize: "0.8rem" }}>
-              Gartner, IAM for LLM-Based AI Agents, Homan Farahmand, 12 June
-              2025
-            </span>
-          </div>
+          </p>
+          <h4>
+            According to Gartner<sup>&reg;</sup>, &ldquo;A unified model that
+            extends established IAM principles and protocols to AI agents, while
+            also fostering interoperability between different AI platforms, is
+            crucial for realizing the benefits of agentic AI in a secure and
+            responsible manner.&rdquo;
+          </h4>
+          <p className="gartner-citation">
+            Gartner, IAM for LLM-Based AI Agents, Homan Farahmand, 12 June 2025
+            <br />
+            GARTNER is a registered trademark and service mark of Gartner, Inc.
+            and/or its affiliates in the U.S. and internationally and is used
+            herein with permission. All rights reserved.
+          </p>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-// Features grid styles
+// Features grid styles — matched to production (open layout, no card borders)
 .mav-features
   background-color: $mav-bg-primary
   padding: 5rem 2rem
@@ -20,8 +20,8 @@
   .features-grid
     display: grid
     grid-template-columns: repeat(3, 1fr)
-    gap: 1.5rem
-    max-width: 1100px
+    gap: 2.5rem 3rem
+    max-width: 1200px
     margin: 0 auto
 
     @media screen and (max-width: 768px)
@@ -31,33 +31,29 @@
       grid-template-columns: repeat(2, 1fr)
 
   .feature-card
-    background: rgba(255, 255, 255, 0.03)
-    border: 1px solid rgba($mav-accent, 0.15)
-    border-radius: 12px
-    padding: 2rem
-    transition: all 0.3s ease
-
-    &:hover
-      border-color: rgba($mav-accent, 0.4)
-      background: rgba($mav-accent, 0.05)
-      transform: translateY(-2px)
+    background: none
+    border: none
+    border-radius: 0
+    padding: 0
 
     .feature-icon
-      font-size: 1.5rem
       margin-bottom: 1rem
-      color: $mav-accent
+      img
+        width: 30px
+        height: 31px
 
     h3
-      font-size: 1.1rem
+      font-size: 1.15rem
       font-weight: 600
       margin-bottom: 0.75rem
+      color: $mav-text-primary
 
     p
       color: $mav-text-secondary
-      font-size: 0.9rem
+      font-size: 0.95rem
       line-height: 1.6
 
-// Industry solutions
+// Industry solutions — matched to production
 .mav-solutions
   background-color: $mav-bg-secondary
   padding: 5rem 2rem

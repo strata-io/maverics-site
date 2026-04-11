@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
         />
       </Helmet>
       <Navbar />
-      <main style={{ paddingTop: "3.25rem" }}>{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );
