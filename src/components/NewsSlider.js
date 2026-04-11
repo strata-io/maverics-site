@@ -60,7 +60,9 @@ const NewsSlider = ({ items }) => {
               <div
                 className="news-card-image"
                 style={{
-                  backgroundImage: item.image ? `url(${item.image})` : "none",
+                  backgroundImage: item.image
+                    ? `url(${item.image})`
+                    : "linear-gradient(135deg, #0E3952 0%, #282948 50%, #0D172E 100%)",
                 }}
               >
                 <span className="post-cat-meta-item">

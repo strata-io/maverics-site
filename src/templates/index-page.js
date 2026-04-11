@@ -19,72 +19,75 @@ export const IndexPageTemplate = ({
 }) => {
   return (
     <>
-      {/* Hero Section with Mesh Gradient */}
-      <section className="mav-hero" style={{ position: "relative", overflow: "hidden" }}>
+      {/* Mesh Gradient wrapper — covers hero through Gartner (matching prod) */}
+      <div className="mesh-gradient-wrapper" style={{ position: "relative", overflow: "hidden" }}>
         <MeshGradient />
-        <div className="hero-logo">
-          <img
-            src="/img/maverics-hero-logo.webp"
-            alt="Maverics"
-          />
-        </div>
-        <h1 className="hero-heading">{heading}</h1>
-        <p className="hero-description">{description}</p>
-        {ctaLink && (
-          <Link to={ctaLink} className="hero-cta">
-            &#10024; {ctaText || "Try the Sandbox"}
-          </Link>
-        )}
-        <div className="hero-screenshot">
-          <img
-            src="/img/maverics-screenshot.webp"
-            alt="Maverics Console"
-          />
-          <div className="hero-bottom-mask" />
-        </div>
-      </section>
 
-      {/* Problem Statement Section — 3 columns */}
-      <section className="mav-problem-section">
-        <div className="problem-heading">
-          <h2>
-            Don&apos;t let the identity gap hold you back from deploying AI
-            agents securely and confidently to production.
-          </h2>
-          <p className="font-size-20">
-            AI agents operate autonomously but lack essential identity controls.
-            Without zero trust authentication, access control and
-            human-in-the-loop authorization, agents run uncontrolled.
-          </p>
-        </div>
-        <div className="problem-columns">
-          <div>
-            <h5>End-to-end observability</h5>
-            <p>
-              Without end-to-end observability, agents create shadow access and
-              risk.
-            </p>
+        {/* Hero Section */}
+        <section className="mav-hero">
+          <div className="hero-logo">
+            <img
+              src="/img/maverics-hero-logo.webp"
+              alt="Maverics"
+            />
           </div>
-          <div>
-            <h5>On-premises deployment</h5>
-            <p>
-              Without on-premises deployment, agents can&apos;t access core
-              systems that can&apos;t migrate to the cloud.
-            </p>
+          <h1 className="hero-heading">{heading}</h1>
+          <p className="hero-description">{description}</p>
+          {ctaLink && (
+            <Link to={ctaLink} className="hero-cta">
+              &#10024; {ctaText || "Try the Sandbox"}
+            </Link>
+          )}
+          <div className="hero-screenshot">
+            <img
+              src="/img/maverics-screenshot.webp"
+              alt="Maverics Console"
+            />
+            <div className="hero-bottom-mask" />
           </div>
-          <div>
-            <h5>Identity Orchestration for Agents</h5>
-            <p>
-              Strata&apos;s Identity Orchestration for Agents solves these
-              challenges through our proven enterprise hybrid platform &ndash;
-              Maverics.
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Gartner Quote — blur-quote-box */}
-      <section style={{ background: "#050B11", padding: "0 2rem 4rem" }}>
+        {/* Problem Statement Section — 3 columns */}
+        <section className="mav-problem-section">
+          <div className="problem-heading">
+            <h2>
+              Don&apos;t let the identity gap hold you back from deploying AI
+              agents securely and confidently to production.
+            </h2>
+            <p className="font-size-20">
+              AI agents operate autonomously but lack essential identity controls.
+              Without zero trust authentication, access control and
+              human-in-the-loop authorization, agents run uncontrolled.
+            </p>
+          </div>
+          <div className="problem-columns">
+            <div>
+              <h5>End-to-end observability</h5>
+              <p>
+                Without end-to-end observability, agents create shadow access and
+                risk.
+              </p>
+            </div>
+            <div>
+              <h5>On-premises deployment</h5>
+              <p>
+                Without on-premises deployment, agents can&apos;t access core
+                systems that can&apos;t migrate to the cloud.
+              </p>
+            </div>
+            <div>
+              <h5>Identity Orchestration for Agents</h5>
+              <p>
+                Strata&apos;s Identity Orchestration for Agents solves these
+                challenges through our proven enterprise hybrid platform &ndash;
+                Maverics.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Gartner Quote — blur-quote-box */}
+        <section style={{ padding: "0 2rem 4rem", position: "relative", zIndex: 1 }}>
         <div className="blur-quote-box">
           <p style={{ marginBottom: "1.5rem" }}>
             <img
@@ -114,7 +117,9 @@ export const IndexPageTemplate = ({
             herein with permission. All rights reserved.
           </p>
         </div>
-      </section>
+        </section>
+      </div>
+      {/* End mesh-gradient-wrapper */}
 
       {/* Features */}
       <FeaturesGrid features={features} />
