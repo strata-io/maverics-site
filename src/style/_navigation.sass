@@ -1,0 +1,84 @@
+// Navigation styles
+.navbar
+  background-color: transparent
+  position: relative
+  z-index: 100
+  padding: 0.5rem 1rem
+  border-bottom: 1px solid rgba($mav-border, 0.5)
+
+  &.is-fixed-top
+    position: fixed
+    width: 100%
+    top: 0
+    background-color: rgba($mav-bg-primary, 0.95)
+    backdrop-filter: blur(10px)
+
+.navbar-brand
+  .navbar-item
+    padding: 0.5rem 0
+    img
+      max-height: 2.5rem
+
+.navbar-item
+  color: $mav-text-primary
+  font-size: 0.95rem
+  font-weight: 500
+  &:hover
+    color: $mav-accent
+    background-color: transparent
+
+.navbar-link
+  color: $mav-text-primary
+  &:hover
+    color: $mav-accent
+    background-color: transparent
+  &::after
+    border-color: $mav-text-secondary
+
+.navbar-dropdown
+  background-color: $mav-bg-surface
+  border: 1px solid $mav-border
+  border-radius: 8px
+  border-top: 2px solid $mav-accent
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4)
+  padding: 0.5rem 0
+  .navbar-item
+    color: $mav-text-primary
+    padding: 0.5rem 1.5rem
+    &:hover
+      background-color: rgba($mav-accent, 0.1)
+      color: $mav-accent
+
+.navbar-cta
+  background-color: transparent
+  border: 1px solid $mav-text-secondary
+  border-radius: 50px
+  color: $mav-text-primary
+  padding: 0.4rem 1.5rem
+  font-size: 0.9rem
+  font-weight: 500
+  transition: all 0.2s ease
+  text-decoration: none
+  display: inline-flex
+  align-items: center
+  &:hover
+    border-color: $mav-accent
+    color: $mav-accent
+
+.navbar-burger
+  color: $mav-text-primary
+  span
+    background-color: $mav-text-primary
+    height: 2px
+
+// Mobile menu
+@media screen and (max-width: 1023px)
+  .navbar-menu
+    background-color: $mav-bg-surface
+    padding: 1rem
+    &.is-active
+      display: block
+  .navbar-dropdown
+    background-color: transparent
+    border: none
+    box-shadow: none

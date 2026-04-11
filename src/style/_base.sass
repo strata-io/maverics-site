@@ -1,0 +1,32 @@
+// Base styles
+html
+  background-color: $mav-bg-primary
+
+body
+  background-color: $mav-bg-primary
+  color: $mav-text-primary
+  font-family: $family-sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+h1, h2, h3, h4, h5, h6
+  color: $mav-text-primary
+  font-weight: 700
+
+a
+  color: $mav-accent
+  transition: color 0.2s ease
+  &:hover
+    color: $mav-accent-light
+
+::selection
+  background-color: rgba($mav-accent, 0.3)
+  color: $mav-text-primary
+
+// Section defaults
+.section
+  background-color: $mav-bg-primary
+
+// Container max-width
+.container
+  max-width: 1200px

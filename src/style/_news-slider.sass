@@ -1,0 +1,93 @@
+// News slider styles
+.mav-news
+  background-color: $mav-bg-primary
+  padding: 4rem 2rem
+
+  .news-header
+    display: flex
+    justify-content: space-between
+    align-items: flex-end
+    max-width: 1200px
+    margin: 0 auto 2rem
+
+    .news-header-left
+      h2
+        font-size: 0.85rem
+        color: $mav-accent
+        text-transform: uppercase
+        letter-spacing: 0.1em
+        font-weight: 600
+        margin-bottom: 0.5rem
+      p
+        font-size: 1.5rem
+        font-weight: 700
+        color: $mav-text-primary
+
+    .news-nav
+      display: flex
+      gap: 0.5rem
+      button
+        background: rgba(255, 255, 255, 0.1)
+        border: 1px solid $mav-border
+        color: $mav-text-primary
+        width: 40px
+        height: 40px
+        border-radius: 50%
+        cursor: pointer
+        display: flex
+        align-items: center
+        justify-content: center
+        transition: all 0.2s ease
+        &:hover
+          border-color: $mav-accent
+          color: $mav-accent
+
+  .news-slider
+    max-width: 1200px
+    margin: 0 auto
+
+  .news-card
+    padding: 0 0.5rem
+
+    .news-card-inner
+      background: rgba(255, 255, 255, 0.03)
+      border: 1px solid $mav-border
+      border-radius: 12px
+      padding: 1.5rem
+      height: 100%
+      transition: all 0.3s ease
+
+      &:hover
+        border-color: rgba($mav-accent, 0.3)
+
+    .news-category
+      display: inline-block
+      background-color: $mav-accent
+      color: $mav-bg-primary
+      font-size: 0.7rem
+      font-weight: 600
+      padding: 0.2rem 0.6rem
+      border-radius: 4px
+      margin-bottom: 0.75rem
+
+    h3
+      font-size: 1rem
+      font-weight: 600
+      color: $mav-text-primary
+      margin-bottom: 0.75rem
+      line-height: 1.4
+
+    p
+      color: $mav-text-secondary
+      font-size: 0.85rem
+      line-height: 1.6
+
+// Slick slider overrides
+.slick-track
+  display: flex
+  gap: 0
+
+.slick-slide
+  height: auto
+  > div
+    height: 100%

@@ -1,0 +1,171 @@
+// Hero section styles
+.mav-hero
+  background: linear-gradient(135deg, #0A0A0A 0%, #111827 50%, #0A0A0A 100%)
+  padding: 6rem 2rem 4rem
+  text-align: center
+  position: relative
+  overflow: hidden
+  border-bottom: 1px solid $mav-orange-border
+
+  &::before
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: radial-gradient(ellipse at center, rgba($mav-accent, 0.05) 0%, transparent 70%)
+    pointer-events: none
+
+  .hero-logo
+    max-width: 600px
+    margin: 0 auto 2rem
+    img
+      width: 100%
+      height: auto
+
+  .hero-heading
+    font-size: 3rem
+    font-weight: 700
+    color: $mav-text-primary
+    margin-bottom: 1.5rem
+    line-height: 1.2
+    background: linear-gradient(135deg, #FFFFFF 0%, #B0E0D8 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+
+  .hero-description
+    font-size: 1.15rem
+    color: $mav-text-secondary
+    max-width: 700px
+    margin: 0 auto 2rem
+    line-height: 1.7
+
+  .hero-cta
+    display: inline-flex
+    align-items: center
+    gap: 0.5rem
+    color: $mav-accent
+    font-size: 1.1rem
+    font-weight: 500
+    text-decoration: none
+    margin-top: 1rem
+    &:hover
+      color: $mav-accent-light
+
+  .hero-screenshot
+    max-width: 900px
+    margin: 3rem auto 0
+    border-radius: 12px
+    overflow: hidden
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5)
+    border: 1px solid $mav-border
+    img
+      width: 100%
+      display: block
+
+// Blog post hero (dark gradient header)
+.blog-hero
+  background: linear-gradient(135deg, #0A0A0A 0%, #111827 50%, #0A0A0A 100%)
+  padding: 6rem 2rem 3rem
+  border-bottom: 1px solid $mav-orange-border
+
+  .blog-hero-content
+    display: flex
+    gap: 3rem
+    align-items: flex-start
+    max-width: 1200px
+    margin: 0 auto
+
+    @media screen and (max-width: 768px)
+      flex-direction: column
+
+  .blog-hero-text
+    flex: 1
+
+  .blog-hero-title
+    font-size: 2.75rem
+    font-weight: 900
+    color: $mav-text-primary
+    line-height: 1.2
+    margin-bottom: 1.5rem
+
+  .blog-hero-image
+    flex: 0 0 400px
+    border-radius: 12px
+    overflow: hidden
+    img
+      width: 100%
+      display: block
+
+    @media screen and (max-width: 768px)
+      flex: 1
+      width: 100%
+
+  .blog-hero-meta
+    display: flex
+    align-items: center
+    gap: 1rem
+    margin-bottom: 1rem
+
+  .author-avatar
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    border: 2px solid $mav-accent
+    object-fit: cover
+
+  .author-info
+    .author-name
+      color: $mav-accent
+      font-weight: 600
+      font-size: 0.95rem
+    .publish-date
+      color: $mav-text-secondary
+      font-size: 0.85rem
+
+  .share-buttons
+    display: flex
+    align-items: center
+    gap: 0.75rem
+    margin-top: 1rem
+    .share-label
+      color: $mav-text-secondary
+      font-size: 0.85rem
+      font-weight: 600
+      text-transform: uppercase
+      letter-spacing: 0.05em
+    a
+      color: $mav-text-secondary
+      font-size: 1.1rem
+      &:hover
+        color: $mav-accent
+
+// Solution page hero
+.solution-hero
+  background: $mav-bg-primary
+  padding: 8rem 2rem 4rem
+  text-align: center
+
+  .solution-breadcrumb
+    color: $mav-accent
+    font-size: 0.85rem
+    letter-spacing: 0.1em
+    text-transform: uppercase
+    margin-bottom: 1rem
+
+  .solution-title
+    font-size: 3.5rem
+    font-weight: 800
+    color: $mav-text-primary
+
+@media screen and (max-width: 768px)
+  .mav-hero
+    padding: 4rem 1rem 2rem
+    .hero-heading
+      font-size: 2rem
+  .blog-hero
+    padding: 4rem 1rem 2rem
+    .blog-hero-title
+      font-size: 1.8rem

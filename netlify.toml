@@ -1,0 +1,14 @@
+[build]
+  command = "npm ci --legacy-peer-deps && npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "20.15.0"
+
+[[plugins]]
+  package = "@netlify/plugin-gatsby"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000"

@@ -1,0 +1,66 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "Create {{collection}} \"{{slug}}\""
+    update: "Update {{collection}} \"{{slug}}\""
+    delete: "Delete {{collection}} \"{{slug}}\""
+    uploadMedia: "[skip ci] Upload \"{{path}}\""
+    deleteMedia: "[skip ci] Delete \"{{path}}\""
+
+local_backend: true
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/pages/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Nick Gamb" }
+      - { label: "Author Image", name: "authorImage", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Post", name: "featuredpost", widget: "boolean", default: false }
+      - { label: "Featured Image", name: "featuredimage", widget: "image" }
+      - { label: "Category", name: "category", widget: "string", default: "Agentic Identity" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/pages/index.md"
+        label: "Homepage"
+        name: "index"
+        fields:
+          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "index-page" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "CTA Text", name: "ctaText", widget: "string" }
+          - { label: "CTA Link", name: "ctaLink", widget: "string" }
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Solutions"
+            name: "solutions"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link", name: "link", widget: "string", required: false }
+          - label: "News Items"
+            name: "newsItems"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Excerpt", name: "excerpt", widget: "text" }
+              - { label: "Category", name: "category", widget: "string", default: "Agentic Identity" }
