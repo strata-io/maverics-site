@@ -64,8 +64,103 @@ export const IndexPageTemplate = ({
         </p>
       </section>
 
+      {/* Gartner Quote Section */}
+      <section
+        style={{
+          background: "#0A0A0A",
+          padding: "4rem 2rem",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "800px",
+            margin: "0 auto",
+            textAlign: "center",
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: "16px",
+            padding: "3rem 2.5rem",
+          }}
+        >
+          <p
+            style={{
+              color: "#B0B0B0",
+              fontSize: "1rem",
+              lineHeight: "1.8",
+              fontStyle: "italic",
+              marginBottom: "1.5rem",
+            }}
+          >
+            &ldquo;A unified model that extends established IAM principles and
+            protocols to AI agents, while also fostering interoperability between
+            different AI platforms, is crucial for realizing the benefits of
+            agentic AI in a secure and responsible manner.&rdquo;
+          </p>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
+            <img
+              src="/img/gartner-logo.svg"
+              alt="Gartner"
+              style={{ height: "24px", opacity: 0.7 }}
+            />
+            <span style={{ color: "#666", fontSize: "0.8rem" }}>
+              Gartner, IAM for LLM-Based AI Agents, Homan Farahmand, 12 June
+              2025
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <FeaturesGrid features={features} />
+
+      {/* Field Guide CTA */}
+      <section
+        style={{
+          background: "#0A0A0A",
+          padding: "5rem 2rem",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            gap: "4rem",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ flex: "1", minWidth: "300px" }}>
+            <Link to="/labs/agentic-ai-sandbox/" className="hero-cta">
+              Try the Sandbox
+            </Link>
+            <h2 style={{ fontSize: "2rem", marginTop: "1.5rem", marginBottom: "1rem" }}>
+              From chaos to control: A field guide to AI agent identity
+            </h2>
+            <p style={{ color: "#B0B0B0", lineHeight: "1.7", marginBottom: "1.5rem" }}>
+              Autonomous agents are multiplying across your environment — but do
+              you know what they&apos;re doing, who they&apos;re acting for, or
+              what they&apos;re allowed to access?
+            </p>
+            <a
+              href="https://www.strata.io/resources/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-button"
+            >
+              Get the field guide
+            </a>
+          </div>
+          <div style={{ flex: "0 0 250px" }}>
+            <img
+              src="/img/field-guide-book.png"
+              alt="AI Agent Identity Field Guide"
+              style={{ width: "100%", borderRadius: "8px" }}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Industry Solutions */}
       <IndustrySolutions solutions={solutions} />
