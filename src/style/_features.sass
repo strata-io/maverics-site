@@ -1,6 +1,6 @@
-// Features grid styles — matched to production (open layout, no card borders)
+// Features grid — transparent so mav-home-row-two row2.webp shows through (prod)
 .mav-features
-  background-color: $mav-bg-primary
+  background: transparent
   padding: 5rem 2rem
 
   .features-header
@@ -53,9 +53,9 @@
       font-size: 0.95rem
       line-height: 1.6
 
-// Industry solutions — matched to production
+// Industry solutions — transparent over second mav-home-row-two (prod)
 .mav-solutions
-  background-color: $mav-bg-secondary
+  background: transparent
   padding: 5rem 2rem
 
   .solutions-header
@@ -82,14 +82,10 @@
       grid-template-columns: 1fr
 
   .solution-card
-    background: rgba(255, 255, 255, 0.03)
-    border: 1px solid $mav-border
-    border-radius: 12px
-    padding: 2rem
-    transition: all 0.3s ease
-
-    &:hover
-      border-color: rgba($mav-accent, 0.3)
+    background: none
+    border: none
+    border-radius: 0
+    padding: 1rem 0
 
     h3
       font-size: 1.25rem

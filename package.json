@@ -9,8 +9,9 @@
   "scripts": {
     "clean": "gatsby clean",
     "start": "npm run develop",
-    "build": "npm run clean && gatsby build",
-    "develop": "npm run clean && gatsby develop",
+    "build": "npm run clean && mkdir -p .cache && gatsby build",
+    "develop": "npm run clean && mkdir -p .cache && gatsby develop",
+    "develop:fast": "gatsby develop",
     "serve": "gatsby serve",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },

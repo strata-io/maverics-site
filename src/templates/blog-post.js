@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
-import { HTMLContent } from "../components/Content";
+import { HTMLContentWithCodeCopy } from "../components/Content";
 import TableOfContents from "../components/TableOfContents";
 import { getAuthor } from "../data/authors";
 
@@ -90,36 +90,24 @@ const BlogPostTemplate = ({
         <div className="blog-content-wrapper">
           <TableOfContents content={content} />
           <div className="blog-body">
-            <HTMLContent content={content} />
+            <HTMLContentWithCodeCopy content={content} />
           </div>
         </div>
       </div>
 
       {/* Tags */}
       {tags && tags.length > 0 && (
-        <section
-          style={{
-            background: "#F5F5F5",
-            padding: "2rem",
-          }}
-        >
-          <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <h4 style={{ color: "#666", marginBottom: "1rem" }}>Tags</h4>
-            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <section className="blog-tags-band">
+          <div className="blog-tags-inner">
+            <h4>Tags</h4>
+            <div className="blog-tags-list">
               {tags.map((tag) => (
                 <Link
                   key={tag}
+                  className="blog-tag-link"
                   to={`/tags/${tag
                     .toLowerCase()
                     .replace(/\s+/g, "-")}/`}
-                  style={{
-                    background: "#E0E0E0",
-                    color: "#333",
-                    padding: "0.3rem 0.75rem",
-                    borderRadius: "4px",
-                    fontSize: "0.85rem",
-                    textDecoration: "none",
-                  }}
                 >
                   {tag}
                 </Link>
@@ -129,12 +117,12 @@ const BlogPostTemplate = ({
         </section>
       )}
 
-      {/* CTA */}
-      <section className="mav-cta-section">
-        <h2>Ready to secure the future of identity for AI agents?</h2>
+      {/* CTA — blog-only styling (gradient + outline button); see .mav-cta-section--blog */}
+      <section className="mav-cta-section mav-cta-section--blog">
+        <h2>Ready to make identity consistent?</h2>
         <p>
-          Orchestrate runtime identity security for AI Agents. Enforce Agent
-          zero trust delegated authorization to MCP resources.
+          Use Identity Orchestration to integrate, automate, and secure identity
+          and apps across hybrid and multi-cloud environments
         </p>
         <Link to="/labs/agentic-ai-sandbox/" className="cta-button">
           Try the Sandbox

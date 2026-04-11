@@ -19,11 +19,12 @@ export const IndexPageTemplate = ({
 }) => {
   return (
     <>
-      {/* Mesh Gradient wrapper — covers hero through Gartner (matching prod) */}
-      <div className="mesh-gradient-wrapper" style={{ position: "relative", overflow: "hidden" }}>
+      <div
+        className="mesh-gradient-wrapper"
+        style={{ position: "relative", overflow: "hidden" }}
+      >
         <MeshGradient />
 
-        {/* Hero Section */}
         <section className="mav-hero">
           <div className="hero-logo">
             <img
@@ -34,9 +35,11 @@ export const IndexPageTemplate = ({
           <h1 className="hero-heading">{heading}</h1>
           <p className="hero-description">{description}</p>
           {ctaLink && (
-            <Link to={ctaLink} className="hero-cta">
-              &#10024; {ctaText || "Try the Sandbox"}
-            </Link>
+            <div className="hero-mid" style={{ marginTop: "30px", marginBottom: "10px", maxWidth: "1080px", marginLeft: "auto", marginRight: "auto", textAlign: "left" }}>
+              <Link to={ctaLink} className="hero-cta">
+                &#10024; {ctaText || "Try the Sandbox"}
+              </Link>
+            </div>
           )}
           <div className="hero-screenshot">
             <img
@@ -46,8 +49,9 @@ export const IndexPageTemplate = ({
             <div className="hero-bottom-mask" />
           </div>
         </section>
+      </div>
 
-        {/* Problem Statement Section — 3 columns */}
+      <div className="mav-home-row-one">
         <section className="mav-problem-section">
           <div className="problem-heading">
             <h2>
@@ -85,48 +89,52 @@ export const IndexPageTemplate = ({
             </div>
           </div>
         </section>
+      </div>
 
-        {/* Gartner Quote — blur-quote-box */}
+      {/* Gartner — prod black band + blur-quote-box.webp */}
+      <div className="mav-gartner-band">
         <section style={{ padding: "0 2rem 4rem", position: "relative", zIndex: 1 }}>
-        <div className="blur-quote-box">
-          <p style={{ marginBottom: "1.5rem" }}>
-            <img
-              src="/img/gartner-logo.svg"
-              alt="Gartner"
-              style={{ width: "144px", height: "auto" }}
-            />
-          </p>
-          <h4>
-            According to Gartner<sup>&reg;</sup>, &ldquo;A unified model that
-            extends established IAM principles and protocols to AI agents, while
-            also fostering interoperability between different AI platforms, is
-            crucial for realizing the benefits of agentic AI in a secure and
-            responsible manner.&rdquo;
-          </h4>
-          <p className="gartner-citation" style={{
-            color: "#5c5f71",
-            fontSize: "13px",
-            fontStyle: "italic",
-            marginTop: "1.5rem",
-            lineHeight: "1.5em",
-          }}>
+          <div className="blur-quote-box">
+            <p style={{ marginBottom: "1.5rem" }}>
+              <img
+                src="/img/gartner-logo.svg"
+                alt="Gartner"
+                style={{ width: "144px", height: "auto" }}
+              />
+            </p>
+            <h4>
+              <em>
+                According to Gartner<sup>&reg;</sup>, &ldquo;A unified model that
+                extends established IAM principles and protocols to AI agents, while
+                also fostering interoperability between different AI platforms, is
+                crucial for realizing the benefits of agentic AI in a secure and
+                responsible manner.&rdquo;
+              </em>
+            </h4>
+          </div>
+          <p className="gartner-citation">
             Gartner, IAM for LLM-Based AI Agents, Homan Farahmand, 12 June 2025
             <br />
             GARTNER is a registered trademark and service mark of Gartner, Inc.
             and/or its affiliates in the U.S. and internationally and is used
             herein with permission. All rights reserved.
           </p>
-        </div>
         </section>
       </div>
-      {/* End mesh-gradient-wrapper */}
 
-      {/* Features */}
-      <FeaturesGrid features={features} />
+      {/* Row 2 — features through field guide (prod: mav-home-row-two + row2.webp) */}
+      <div className="mav-home-row-two">
+        <FeaturesGrid features={features} />
 
-      {/* Field Guide — blur-box-one with 7/5 split */}
-      <section style={{ background: "#050B11", padding: "4rem 2rem" }}>
-        <div className="blur-box-one">
+        <section style={{ padding: "0 2rem 4rem", textAlign: "center" }}>
+          <Link className="strata-btn9" to="/labs/agentic-ai-sandbox/">
+            Try the Sandbox
+          </Link>
+        </section>
+
+        {/* Field Guide — blur-box-one */}
+        <section style={{ padding: "0 2rem 4rem" }}>
+          <div className="blur-box-one">
           <div style={{
             display: "flex",
             alignItems: "center",
@@ -167,13 +175,16 @@ export const IndexPageTemplate = ({
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
-      {/* Industry Solutions */}
-      <IndustrySolutions solutions={solutions} />
+      {/* Second row2 band — industry solutions (prod) */}
+      <div className="mav-home-row-two">
+        <IndustrySolutions solutions={solutions} />
+      </div>
 
-      {/* Ready to Secure CTA — blur-box-two */}
-      <section style={{ background: "#050B11", padding: "4rem 2rem" }}>
+      {/* Ready to Secure CTA — blur-box-two (same band as prod, not on #050B11 so corners don’t read as a frame) */}
+      <section className="mav-home-cta-blur-section">
         <div className="blur-box-two">
           <h2 style={{ textAlign: "center" }}>
             Ready to secure the future of identity for AI agents?
@@ -190,52 +201,65 @@ export const IndexPageTemplate = ({
         </div>
       </section>
 
-      {/* Secure Delegated AI Actions — if-row with image */}
+      {/* Secure Delegated AI Actions — side-by-side layout */}
       <section className="if-row" style={{ padding: "160px 2rem 100px" }}>
         <div style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          gap: "3rem",
-          flexWrap: "wrap",
         }}>
-          <div style={{ flex: "1 1 50%", minWidth: "300px", paddingRight: "40px" }}>
-            <h2>
-              Secure delegated AI actions with policy, context, and full
-              auditability
-            </h2>
-            <p>
-              From issuing refunds to making purchases, AI agents increasingly
-              act on-behalf-of users and other systems. However, legacy IAM
-              can&apos;t trace who delegated what, or enforce fine-grained
-              policies during execution.
-            </p>
-            <p>
-              With Maverics: Secure every agent workflow with delegated identity,
-              runtime access enforcement, and contextual policy evaluation.
-              Support OAuth 2.0 On-Behalf-Of (OBO), Demonstration of Proof of
-              Possession (DPoP), and attribute-based authorization at the API
-              layer. Ensure each action is logged, scoped, and auditable.
-            </p>
-            <p>
-              <Link className="strata-btn9" to="/labs/agentic-ai-sandbox/">
-                Try the Sandbox
-              </Link>
-            </p>
-          </div>
-          <div style={{ flex: "1 1 50%", minWidth: "300px" }}>
-            <img
-              src="/img/agent-fabric.webp"
-              alt="Agent Identity Fabric"
-              style={{ width: "100%", height: "auto" }}
-            />
+          <div className="delegated-auth-row" style={{
+            display: "flex",
+            gap: "3rem",
+            alignItems: "center",
+          }}>
+            <div style={{ flex: "1" }}>
+              <h2>
+                Secure delegated AI actions with policy, context, and full
+                auditability
+              </h2>
+              <p>
+                From issuing refunds to making purchases, AI agents increasingly
+                act on-behalf-of users and other systems. However, legacy IAM
+                can&apos;t trace who delegated what, or enforce fine-grained
+                policies during execution.
+              </p>
+              <p>
+                With Maverics: Secure every agent workflow with delegated identity,
+                runtime access enforcement, and contextual policy evaluation.
+                Support OAuth 2.0 On-Behalf-Of (OBO), Demonstration of Proof of
+                Possession (DPoP), and attribute-based authorization at the API
+                layer. Ensure each action is logged, scoped, and auditable.
+              </p>
+              <p>
+                <Link className="strata-btn9" to="/labs/agentic-ai-sandbox/">
+                  Try the Sandbox
+                </Link>
+              </p>
+            </div>
+            <div style={{ flex: "1" }}>
+              <img
+                src="/img/agent-fabric.webp"
+                alt="Agent Identity Fabric"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* News Slider */}
-      <NewsSlider items={newsItems} />
+      {/* News — prod #000 band */}
+      <div className="mav-news-band">
+        <NewsSlider items={newsItems} />
+      </div>
+
+      {/* Responsive styles for delegated auth section */}
+      <style>{`
+        @media (max-width: 768px) {
+          .delegated-auth-row {
+            flex-direction: column !important;
+          }
+        }
+      `}</style>
     </>
   );
 };
@@ -300,6 +324,7 @@ export const pageQuery = graphql`
           title
           excerpt
           category
+          image
         }
       }
     }

@@ -1,6 +1,6 @@
-// News slider — matched to production
+// News slider — sits on .mav-news-band (#000); keep transparent here
 .mav-news
-  background-color: $mav-bg-primary
+  background: transparent
   padding: 4rem 2rem
 
   .ai-news-slider-header
@@ -49,18 +49,33 @@
     margin: 0 auto
     overflow: visible
 
-  // Slick overrides
+  // Slick overrides for equal-height cards
   .slick-list
     overflow: visible
+  .slick-track
+    display: flex !important
   .slick-slide
+    height: auto !important
     margin-right: 20px
+    > div
+      height: 100%
+      display: flex
 
+  // Card — matched to production .blog-post-standard
   .news-card
+    height: 100%
+    display: flex
+    flex-direction: column
+    border: 1px solid #555
+    border-radius: 20px
+    background: #000
+    box-shadow: 0px 14px 35px rgba(0, 0, 0, 0.06)
+    overflow: hidden
+
     .news-card-image
       height: 220px
       background-position: center center
       background-size: cover
-      border-radius: 12px 12px 0 0
       position: relative
       overflow: hidden
 
@@ -86,11 +101,8 @@
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)
 
     .news-card-content
+      flex: 1
       padding: 26px
-      background: rgba(255, 255, 255, 0.03)
-      border: 1px solid rgba(255, 255, 255, 0.08)
-      border-top: none
-      border-radius: 0 0 12px 12px
 
     .news-card-title
       font-size: 19px
@@ -101,6 +113,6 @@
       line-height: 1.4
 
     .news-card-excerpt
-      color: $mav-text-secondary
-      font-size: 14px
-      line-height: 1.6
+      color: #FFF
+      font-size: 15px
+      line-height: 1.5em

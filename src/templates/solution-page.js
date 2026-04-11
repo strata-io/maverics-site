@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
-import { HTMLContent } from "../components/Content";
+import { HTMLContentWithCodeCopy } from "../components/Content";
 import NewsSlider from "../components/NewsSlider";
 
 const SolutionPageTemplate = ({
@@ -41,7 +41,7 @@ const SolutionPageTemplate = ({
       {content && (
         <section style={{ background: "#F5F5F5", padding: "3rem 2rem" }}>
           <div style={{ maxWidth: "800px", margin: "0 auto", color: "#1a1a1a" }}>
-            <HTMLContent content={content} />
+            <HTMLContentWithCodeCopy content={content} />
           </div>
         </section>
       )}

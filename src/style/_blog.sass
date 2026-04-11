@@ -6,7 +6,7 @@
   .blog-listing-header
     text-align: center
     padding: 10rem 2rem 3rem
-    background: linear-gradient(135deg, #0E3952 0%, #282948 50%, #050B11 100%)
+    background: linear-gradient(180deg, #0E3952 0%, #1a1a3e 30%, #050B11 100%)
     h1
       font-size: 3rem
       font-weight: 800
@@ -144,31 +144,57 @@
   .blog-body
     flex: 1
     min-width: 0
-    color: #1a1a1a
-    font-size: 1.05rem
-    line-height: 1.8
+    // Prod .post-template-page-new-blog-php main / article
+    color: #525567
+    font-size: 16px
+    line-height: 1.6em
+
+    // Remark HTML is wrapped in a div — align first block with prod article (no extra top gap)
+    > div > *:first-child
+      margin-top: 0
 
     h2
-      color: #1a1a1a
-      font-size: 1.75rem
+      color: #525567
+      font-size: 26px
+      font-weight: 700
+      letter-spacing: -1px
+      line-height: 1.2em
       margin-top: 2.5rem
-      margin-bottom: 1rem
+      margin-bottom: 20px
 
     h3
-      color: #1a1a1a
-      font-size: 1.35rem
+      color: #525567
+      font-weight: 700
+      letter-spacing: -0.5px
+      font-size: 23px
       margin-top: 2rem
       margin-bottom: 0.75rem
+
+    h4
+      color: #525567
+      font-weight: 700
+
+    h5
+      color: #525567
+      font-size: 18px
+      font-weight: 700
 
     p
       margin-bottom: 1.25rem
 
+    // Prod body.single-post article a / a:hover
     a
-      color: $mav-accent-dark
+      color: #7762F9
       text-decoration: underline
+      &:hover
+        color: $mav-accent
+
+    strong, b
+      color: #525567
+      font-weight: 700
 
     img
-      border-radius: 8px
+      border-radius: 10px
       margin: 1.5rem 0
 
     blockquote
@@ -177,6 +203,33 @@
       margin: 1.5rem 0
       color: $mav-text-muted
       font-style: italic
+      p:last-child
+        margin-bottom: 0
+
+    ul, ol
+      margin: 0 0 20px 0
+      padding-left: 1.75rem
+      list-style-position: outside
+
+    li
+      margin-bottom: 8px
+      // Remark often wraps list items in <p>, which stacks extra vertical space
+      > p
+        margin-top: 0.35rem
+        margin-bottom: 0.5rem
+        &:first-child
+          margin-top: 0
+        &:last-child
+          margin-bottom: 0
+
+    ul ul, ol ol, ul ol, ol ul
+      margin-top: 0.5rem
+      margin-bottom: 0.5rem
+
+    hr
+      border: none
+      border-top: 1px solid #E0E0E0
+      margin: 2rem 0
 
     table
       width: 100%
@@ -190,15 +243,6 @@
         background: #F5F5F5
         font-weight: 600
 
-    // Code blocks (Prism.js)
-    pre[class*="language-"]
-      background: #1a1a2e
-      border-radius: 8px
-      padding: 1.5rem
-      margin: 1.5rem 0
-      overflow-x: auto
-      font-size: 0.9rem
-
     code:not([class*="language-"])
       background: #F0F0F0
       padding: 0.2rem 0.5rem
@@ -206,12 +250,92 @@
       font-size: 0.9em
       color: #D4632A
 
-// CTA section in blog/solution pages
+// Prism fenced blocks — prod article pre margin + radii; shared by blog + solution markdown
+pre[class*="language-"]
+  position: relative
+  margin-top: 0
+  margin-bottom: 20px
+  border-radius: 10px
+  padding: 1rem 2.75rem 1rem 1rem
+  overflow-x: auto
+  font-size: 0.9rem
+
+pre[class*="language-"] code
+  border-radius: 10px
+
+// Icon-only copy control (compact; works inside any Prism <pre>, not only .blog-body)
+pre[class*="language-"] > .blog-code-copy
+  position: absolute
+  top: 8px
+  right: 8px
+  z-index: 2
+  box-sizing: border-box
+  width: 32px
+  height: 32px
+  margin: 0
+  padding: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 1px solid rgba(255, 255, 255, 0.18)
+  border-radius: 6px
+  cursor: pointer
+  background: rgba(0, 0, 0, 0.35)
+  color: rgba(255, 255, 255, 0.85)
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease
+  &:hover
+    background: rgba(255, 255, 255, 0.1)
+    border-color: rgba(255, 255, 255, 0.35)
+    color: #fff
+  &:focus-visible
+    outline: 2px solid $mav-accent
+    outline-offset: 2px
+  .blog-code-copy-svg
+    display: block
+    flex-shrink: 0
+
+// Tags row above blog CTA — white band like prod (avoids gray → dark seam)
+.blog-tags-band
+  background: $mav-text-primary
+  padding: 1.75rem 2rem 2rem
+  border-top: 1px solid #E8E8ED
+
+  .blog-tags-inner
+    max-width: 1200px
+    margin: 0 auto
+
+  h4
+    font-family: $font-body
+    font-size: 0.8rem
+    font-weight: 700
+    text-transform: uppercase
+    letter-spacing: 0.06em
+    color: $mav-text-muted
+    margin: 0 0 0.75rem
+
+  .blog-tags-list
+    display: flex
+    flex-wrap: wrap
+    gap: 0.5rem
+
+  .blog-tag-link
+    display: inline-block
+    background: #EEF0F4
+    color: #525567
+    padding: 0.35rem 0.85rem
+    border-radius: 6px
+    font-size: 0.85rem
+    font-weight: 600
+    text-decoration: none
+    transition: background 0.2s ease, color 0.2s ease
+    &:hover
+      background: rgba($mav-accent, 0.15)
+      color: #7762F9
+
+// Footer CTA — shared shell (solutions use solid dark + filled button; blog overrides below)
 .mav-cta-section
-  background: linear-gradient(135deg, $mav-bg-primary 0%, #111827 100%)
   padding: 5rem 2rem
   text-align: center
-  border-top: 1px solid $mav-border
 
   h2
     font-size: 2rem
@@ -219,21 +343,57 @@
     margin-bottom: 1rem
 
   p
-    color: $mav-text-secondary
-    max-width: 600px
+    max-width: 640px
     margin: 0 auto 2rem
     line-height: 1.7
 
   .cta-button
     display: inline-block
-    background-color: $mav-accent
-    color: $mav-bg-primary
     padding: 0.75rem 2rem
     border-radius: 50px
     font-weight: 600
     font-size: 1rem
     text-decoration: none
-    transition: all 0.2s ease
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease
+
+// Solutions (and any non-blog use) — unchanged look
+.mav-cta-section:not(.mav-cta-section--blog)
+  background: linear-gradient(135deg, $mav-bg-primary 0%, #111827 100%)
+  border-top: 1px solid $mav-border
+
+  h2
+    color: $mav-text-primary
+
+  p
+    color: $mav-text-secondary
+
+  .cta-button
+    background-color: $mav-accent
+    color: $mav-bg-primary
+    border: 2px solid transparent
     &:hover
       background-color: $mav-accent-hover
       transform: translateY(-1px)
+
+// Blog posts only — prod: vertical teal → black gradient, ghost “Try the Sandbox” button
+.mav-cta-section--blog
+  background: linear-gradient(180deg, $mav-accent 0%, #0a6b66 22%, #0d2838 55%, $mav-bg-primary 100%)
+  border-top: none
+
+  h2
+    color: #fff
+
+  p
+    color: rgba(255, 255, 255, 0.95)
+
+  .cta-button
+    background: transparent
+    color: #fff
+    border: 2px solid #fff
+    &:hover
+      background: rgba(255, 255, 255, 0.12)
+      color: #fff
+      transform: translateY(-1px)
+    &:focus-visible
+      outline: 2px solid #fff
+      outline-offset: 4px

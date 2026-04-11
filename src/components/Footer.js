@@ -18,6 +18,7 @@ const Footer = () => {
                 className="footer-security-logos"
               />
             </a>
+            <br/>
             <a
               href="https://www.strata.io/security-portal/"
               target="_blank"

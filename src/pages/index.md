@@ -38,31 +38,41 @@ newsItems:
   - title: "Prevent MCP Bypass"
     excerpt: "The Model Context Protocol (MCP) emerged as the answer to agent chaos. It's the structured way agents talk to each other and to your systems. But MCP only works if..."
     category: "Agentic Identity"
+    image: /img/news/news-0.webp
   - title: "Guardrails, not guesswork: Why your AI Pilot is a million-dollar demo that will never make a dime"
     excerpt: "The difference between eternal pilots and revenue-generating production isn't luck or politics. It's engineering. Specifically, identity engineering."
     category: "Agentic Identity"
+    image: /img/news/news-1.webp
   - title: "Pilots don't pay: The $10 million demo that never made a dollar"
     excerpt: "Here's the brutal truth your vendors won't tell you: Pilots don't pay. They don't even break even. They're cost centers dressed up as innovation."
     category: "Agentic Identity"
+    image: /img/news/news-2.webp
   - title: "From pilot to production: the identity bridge nobody wants to talk about"
     excerpt: "Your security team isn't trying to kill innovation. They're trying to keep you employed. When they look at your AI agents, here's what keeps them up at night."
     category: "Agentic Identity"
+    image: /img/news/news-3.webp
   - title: "Measuring ROAI: The numbers that separate AI winners from AI wannabes"
     excerpt: "Here's what nobody tells you about ROAI: You can't measure it in PowerPoint. You can't calculate it in pilots. You can only count it in production."
     category: "Agentic Identity"
+    image: /img/news/news-4.webp
   - title: "The compliance gate: where AI dreams go to die (or get born)"
     excerpt: "The difference between projects that die at the gate and those that sail through isn't luck. It's infrastructure. Specifically, identity infrastructure."
     category: "Agentic Identity"
+    image: /img/news/news-5.webp
   - title: "Agent credential replay: Why bearer tokens are digital cash in a tornado"
     excerpt: "Here's what should keep you up at night: Your agents are passing these digital IOUs to each other thousands of times per second."
     category: "Agentic Identity"
+    image: /img/news/news-6.webp
   - title: "Human-in-the-loop: When your AI's creativity becomes your legal liability"
     excerpt: "Here's the truth nobody wants to admit: Your autonomous agents are making promises right now that you don't know about, can't afford, and will be legally forced to honor."
     category: "Agentic Identity"
+    image: /img/news/news-7.webp
   - title: "Blind spots: Your agents are operating in complete darkness (and so are you)"
     excerpt: "Traditional IAM logs were built for humans clicking buttons. Your agents are executing complex decision trees at machine speed."
     category: "Agentic Identity"
+    image: /img/news/news-8.webp
   - title: "Over-scoped agents: The permission sprawl that will end you"
     excerpt: "Every engineering team is spinning up agents. And they're all over-scoped because nobody wants to be the person whose agent doesn't work."
     category: "Agentic Identity"
+    image: /img/news/news-9.webp
 ---

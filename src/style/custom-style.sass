@@ -4,9 +4,9 @@
 @import "./_footer.sass"
 @import "./_hero.sass"
 @import "./_features.sass"
-@import "./_blog.sass"
 @import "./_news-slider.sass"
 @import "./_buttons.sass"
 
-// Prism.js theme
+// Prism first — _blog.sass loads after so fenced-block padding / copy control override theme defaults
 @import "~prismjs/themes/prism-tomorrow"
+@import "./_blog.sass"

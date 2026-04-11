@@ -38,6 +38,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       excerpt: String
       category: String
+      image: String
     }
     type MarkdownRemark implements Node {
       frontmatter: MarkdownRemarkFrontmatter
