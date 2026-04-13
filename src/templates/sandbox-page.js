@@ -13,8 +13,8 @@ const SandboxPageTemplate = ({ title, heading, description, learnItems }) => {
     script.onload = () => {
       if (window.hbspt) {
         window.hbspt.forms.create({
-          portalId: "your-portal-id",
-          formId: "your-form-id",
+          portalId: "6226005",
+          formId: "4dd23cd3-4182-420c-b3b0-1cb85556a4f2",
           target: "#hubspot-form",
           css: "",
         });
@@ -27,104 +27,37 @@ const SandboxPageTemplate = ({ title, heading, description, learnItems }) => {
   }, []);
 
   return (
-    <>
-      <section
-        style={{
-          background: "linear-gradient(135deg, #0A0A0A 0%, #111827 100%)",
-          padding: "4rem 2rem",
-          minHeight: "100vh",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-            display: "flex",
-            gap: "4rem",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ flex: "1", minWidth: "300px" }}>
-            <p
-              style={{
-                color: "#00BFA6",
-                fontSize: "0.85rem",
-                marginBottom: "0.5rem",
-              }}
-            >
-              {title}
-            </p>
-            <h1
-              style={{
-                fontSize: "2.5rem",
-                fontWeight: "800",
-                color: "#FFFFFF",
-                lineHeight: "1.2",
-                marginBottom: "1.5rem",
-              }}
-            >
-              {heading}
-            </h1>
-            <p
-              style={{
-                color: "#B0B0B0",
-                lineHeight: "1.7",
-                marginBottom: "2rem",
-              }}
-            >
-              {description}
-            </p>
-            {learnItems && learnItems.length > 0 && (
-              <>
-                <p style={{ color: "#00BFA6", fontWeight: "600" }}>
-                  You&apos;ll learn how to:
-                </p>
-                <ul style={{ listStyle: "none", padding: "0", marginTop: "1rem" }}>
-                  {learnItems.map((item, i) => (
-                    <li
-                      key={i}
-                      style={{
-                        color: "#B0B0B0",
-                        marginBottom: "0.75rem",
-                        paddingLeft: "1.5rem",
-                        position: "relative",
-                      }}
-                    >
-                      <span
-                        style={{
-                          position: "absolute",
-                          left: "0",
-                          color: "#00BFA6",
-                        }}
-                      >
-                        &#10003;
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </div>
-          <div
-            style={{
-              flex: "0 0 450px",
-              background: "rgba(0,0,0,0.3)",
-              borderRadius: "12px",
-              padding: "2rem",
-              minWidth: "300px",
-            }}
-          >
-            <div id="hubspot-form">
-              <p style={{ color: "#B0B0B0", textAlign: "center" }}>
-                Loading form...
+    <section className="sandbox-section">
+      <div className="sandbox-container">
+        <div className="sandbox-content">
+          <p className="sandbox-eyebrow">{title}</p>
+          <h1 className="sandbox-heading">{heading}</h1>
+          <p className="sandbox-description">{description}</p>
+          {learnItems && learnItems.length > 0 && (
+            <>
+              <hr className="sandbox-divider" />
+              <p className="sandbox-learn-label">
+                You&apos;ll learn how to:
               </p>
-            </div>
+              <ul className="sandbox-learn-list">
+                {learnItems.map((item, i) => (
+                  <li key={i} className="sandbox-learn-item">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+        <div className="sandbox-form-wrapper">
+          <div id="hubspot-form">
+            <p style={{ color: "#B0B0B0", textAlign: "center" }}>
+              Loading form...
+            </p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

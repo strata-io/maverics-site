@@ -12,3 +12,38 @@
   for = "/*"
   [headers.values]
     Strict-Transport-Security = "max-age=63072000"
+
+# SEO redirects — preserve WordPress URLs after migration
+# 301 permanent redirects so search engines transfer link equity
+
+[[redirects]]
+  from = "/blog/agentic-identity/i-gave-4-ai-agents-a-corporate-bank-account-heres-how-i-stopped-them-from-draining-it/"
+  to = "/blog/2026-04-09-ai-agents-corporate-bank-account/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/agentic-identity/your-mcp-server-is-a-resource-server-now-act-like-it/"
+  to = "/blog/2026-04-08-mcp-server-resource-server/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/agentic-identity/the-agentic-virus-how-ai-agents-become-self-spreading-malware/"
+  to = "/blog/2026-02-18-agentic-virus/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/securing-mcp-with-maverics-ai-gateway/"
+  to = "/blog/2026-02-18-securing-mcp-servers/"
+  status = 301
+
+# WordPress category page → blog index
+[[redirects]]
+  from = "/blog/agentic-identity/"
+  to = "/blog/"
+  status = 301
+
+# Sandbox shortcut URL
+[[redirects]]
+  from = "/sandbox/"
+  to = "/labs/agentic-ai-sandbox/"
+  status = 301

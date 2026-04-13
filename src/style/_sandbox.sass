@@ -1,0 +1,372 @@
+// Sandbox page — /labs/agentic-ai-sandbox/
+.sandbox-section
+  background: url('/img/bg/sandbox-hero.webp'), linear-gradient(135deg, #0A0A0A 0%, #111827 100%)
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: cover
+  padding: 8rem 2rem 4rem
+  min-height: 100vh
+
+  @media screen and (max-width: 768px)
+    padding: 4rem 1rem 2rem
+
+.sandbox-container
+  max-width: 1200px
+  margin: 0 auto
+  display: flex
+  gap: 0
+  align-items: flex-start
+
+  @media screen and (max-width: 960px)
+    flex-direction: column
+    gap: 2rem
+
+.sandbox-content
+  flex: 1
+  min-width: 0
+  padding-right: 40px
+
+  @media screen and (max-width: 960px)
+    padding-right: 0
+
+.sandbox-eyebrow
+  color: $mav-accent
+  font-family: $font-title
+  font-size: 16px
+  letter-spacing: 1px
+  margin-bottom: 1.5rem
+
+.sandbox-heading
+  font-family: $font-body
+  font-size: 38px
+  font-weight: 700
+  color: $mav-text-primary
+  line-height: 1.1
+  letter-spacing: -1px
+  margin-bottom: 2rem
+
+  @media screen and (max-width: 768px)
+    font-size: 28px
+
+.sandbox-description
+  color: $mav-text-primary
+  font-family: $font-body
+  font-size: 16px
+  line-height: 1.7
+  margin-bottom: 0
+
+// Horizontal divider before "You'll learn how to"
+.sandbox-divider
+  border: none
+  border-top: 1px solid rgba(255, 255, 255, 0.4)
+  margin: 3rem 0 2.5rem
+
+.sandbox-learn-label
+  color: $mav-accent
+  font-family: $font-title
+  font-size: 16px
+  font-weight: 400
+  letter-spacing: 1px
+  margin-bottom: 1.5rem
+
+.sandbox-learn-list
+  list-style: none
+  padding: 0
+  margin-top: 0
+
+.sandbox-learn-item
+  color: $mav-text-primary
+  font-family: $font-body
+  font-size: 16px
+  line-height: 1.5
+  margin-bottom: 1.25rem
+  padding-left: 2rem
+  position: relative
+
+  &::before
+    content: "\2713"
+    position: absolute
+    left: 0
+    color: $mav-accent
+
+.sandbox-form-wrapper
+  flex: 0 0 44%
+  border-radius: 20px
+  border: 1px solid $mav-border
+  background: rgba(0, 0, 0, 0.4)
+  padding: 28px
+
+  @media screen and (max-width: 960px)
+    flex: none
+    width: 100%
+    margin-left: 0
+
+  @media screen and (max-width: 768px)
+    padding: 20px
+
+  // HubSpot form dark theme — 1:1 match with prod (.hs-form-wrapper-report)
+  // HubSpot injects its own CSS with high specificity, so !important is required
+  .hs-form
+    // Reset ALL Bulma .input wrappers — HubSpot wraps each field in <div class="input">
+    // which Bulma styles as a white input element with fixed height
+    .hs-form-field > .input
+      display: block !important
+      height: auto !important
+      width: 100% !important
+      background: transparent !important
+      border: none !important
+      box-shadow: none !important
+      padding: 0 !important
+      color: inherit !important
+
+    // Hide labels on text/email/tel fields — prod uses placeholder-only
+    .hs-fieldtype-text > label,
+    .hs-fieldtype-phonenumber > label
+      display: none !important
+
+    // Text inputs — prod: teal bg, left-border accent, Electrolize font
+    input.hs-input,
+    textarea.hs-input
+      border-left: 3px solid #1acfc7 !important
+      border-top: none !important
+      border-bottom: none !important
+      border-right: none !important
+      background: #096d6e !important
+      font: 14px/1.5em $font-title !important
+      color: #FFF !important
+      border-radius: 4px !important
+      padding: 10px 14px !important
+      margin-bottom: 15px !important
+      width: 100% !important
+      box-sizing: border-box !important
+      outline: none !important
+      transition: all 0.2s ease-in-out
+
+      &::placeholder
+        color: rgba(255, 255, 255, 0.85) !important
+
+      &:hover
+        border-left: 3px solid #FFF !important
+        outline: none !important
+
+      &:focus
+        border-left: 3px solid #FFF !important
+        outline: none !important
+
+    // Select dropdowns
+    select.hs-input
+      border-left: 3px solid #1acfc7 !important
+      border-top: none !important
+      border-bottom: none !important
+      border-right: none !important
+      background: #096d6e !important
+      font-family: $font-title !important
+      color: #FFF !important
+      border-radius: 4px !important
+      padding: 13px 20px !important
+      width: 100% !important
+      box-sizing: border-box !important
+      appearance: none !important
+      -webkit-appearance: none !important
+      outline: none !important
+      transition: all 0.2s ease-in-out
+
+      &:hover,
+      &:focus
+        border-left: 3px solid #FFF !important
+        outline: none !important
+
+    // Exclude checkboxes from input styling
+    input.hs-input[type="checkbox"]
+      width: auto !important
+      padding: 0 !important
+      border: none !important
+      background: none !important
+      margin-bottom: 0 !important
+
+    // Labels (for checkbox question etc.)
+    label
+      color: $mav-text-primary !important
+      font-size: 16px !important
+      font-weight: 800 !important
+      font-family: $font-body !important
+      line-height: 1.2em !important
+      margin-bottom: 5px !important
+      display: block
+
+    .hs-form-required
+      color: $mav-accent !important
+
+    // Field spacing
+    .hs-form-field
+      margin-bottom: 0 !important
+
+    // Checkbox question label + spacing — grey text, normal weight
+    .hs-fieldtype-checkbox > label
+      display: block !important
+      margin-top: 20px !important
+      margin-bottom: 10px !important
+      color: $mav-text-secondary !important
+      font-weight: normal !important
+      font-size: 14px !important
+
+    // Checkbox item labels — white text
+    .hs-form-checkbox label
+      font-size: 15px !important
+      line-height: 1.5em !important
+      font-weight: normal !important
+      color: $mav-text-primary !important
+      margin-bottom: 0 !important
+      margin-top: 0 !important
+
+    // Checkbox/boolean .input wrappers handled by global .hs-form-field > .input reset above
+
+    // Checkbox lists
+    .inputs-list
+      list-style: none !important
+      padding: 0 !important
+      margin: 0 !important
+
+    .hs-form-checkbox,
+    .hs-form-booleancheckbox
+      margin-bottom: 4px !important
+
+      label
+        display: flex !important
+        align-items: flex-start !important
+        gap: 0 !important
+        cursor: pointer
+
+      // Hide native checkbox — prod uses ::before pseudo-element
+      input[type="checkbox"]
+        appearance: none !important
+        -webkit-appearance: none !important
+        width: 0 !important
+        height: 0 !important
+        position: absolute !important
+        opacity: 0 !important
+        margin: 0 !important
+        padding: 0 !important
+
+      // Custom checkbox via ::before on the span
+      input[type="checkbox"] + span
+        padding-left: 30px !important
+        position: relative !important
+        color: $mav-text-primary !important
+        font-size: 15px !important
+        line-height: 1.5em !important
+
+        &::before
+          content: "" !important
+          display: inline-block !important
+          width: 20px !important
+          height: 20px !important
+          border: 2px solid #CACAD1 !important
+          background: none !important
+          border-radius: 4px !important
+          position: absolute !important
+          left: 0 !important
+          top: 1px !important
+
+      input[type="checkbox"]:checked + span::before
+        background-color: #096d6e !important
+        border: 2px solid #FFF !important
+        box-shadow: inset 0 0 0 2px #096d6e !important
+
+      span a
+        color: $mav-accent !important
+        text-decoration: underline
+
+        &:hover
+          color: $mav-accent-hover !important
+
+    // Legal consent — indented small checkbox, muted text
+    .legal-consent-container
+      margin-top: 8px !important
+      margin-bottom: 0 !important
+      padding-left: 10px !important
+
+      .hs-form-booleancheckbox label
+        display: flex !important
+        align-items: flex-start !important
+        gap: 0 !important
+        font-weight: normal !important
+        font-size: 13px !important
+        color: $mav-text-muted !important
+        cursor: pointer
+
+      .hs-form-booleancheckbox input[type="checkbox"]
+        appearance: none !important
+        -webkit-appearance: none !important
+        width: 0 !important
+        height: 0 !important
+        position: absolute !important
+        opacity: 0 !important
+        margin: 0 !important
+        padding: 0 !important
+
+      .hs-form-booleancheckbox input[type="checkbox"] + span
+        padding-left: 24px !important
+        position: relative !important
+        color: $mav-text-muted !important
+        font-size: 13px !important
+        line-height: 1.5em !important
+
+        &::before
+          content: "" !important
+          display: inline-block !important
+          width: 14px !important
+          height: 14px !important
+          border: 2px solid #CACAD1 !important
+          background: none !important
+          border-radius: 3px !important
+          position: absolute !important
+          left: 0 !important
+          top: 2px !important
+
+      .hs-form-booleancheckbox input[type="checkbox"]:checked + span::before
+        background-color: #096d6e !important
+        border: 2px solid #FFF !important
+
+      legend.hs-field-desc
+        display: none !important
+
+    // Submit button — prod: pill shape, Montserrat, mixed case
+    .hs-button
+      background: $mav-accent !important
+      border: 2px solid $mav-accent !important
+      width: 100% !important
+      display: block !important
+      font-family: $font-button !important
+      font-weight: 600 !important
+      border-radius: 27px !important
+      font-size: 16px !important
+      padding: 15px !important
+      letter-spacing: 1px !important
+      color: #FFF !important
+      text-transform: none !important
+      margin-top: 20px !important
+      cursor: pointer
+      transition: all 0.2s ease-in-out
+
+      &:hover
+        background: #6A3EC8 !important
+        color: #FFF !important
+        border: 2px solid #6A3EC8 !important
+
+    // Error messages
+    .hs-error-msgs
+      list-style: none !important
+      padding: 0 !important
+      margin: 0.25rem 0 0 !important
+
+      li label
+        display: block !important
+        color: #ff6b6b !important
+        font-size: 0.8rem !important
+        font-weight: 400 !important
+
+    // Field descriptions
+    .hs-field-desc
+      color: $mav-text-secondary !important
+      font-size: 0.8rem !important
