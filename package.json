@@ -17,6 +17,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "decap-cms-app": "^3.3.3",
     "gatsby": "^4.25.0",
     "gatsby-plugin-decap-cms": "^4.0.0",
@@ -39,7 +40,8 @@
     "react-helmet": "^6.1.0",
     "react-slick": "^0.30.0",
     "sass": "^1.69.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "decap-server": "^3.0.0",

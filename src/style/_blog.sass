@@ -19,6 +19,46 @@
       max-width: 700px
       margin: 0 auto
 
+  // MCP endpoint banner
+  .blog-mcp-banner
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 0.6rem
+    padding: 0.65rem 1.5rem
+    background: rgba($mav-accent, 0.06)
+    border-top: 1px solid rgba($mav-accent, 0.12)
+    border-bottom: 1px solid rgba($mav-accent, 0.12)
+    font-size: 13px
+    color: $mav-text-secondary
+    font-family: $font-body
+
+    .blog-mcp-icon
+      font-size: 14px
+
+    a
+      color: $mav-accent
+      text-decoration: none
+      font-weight: 600
+      &:hover
+        text-decoration: underline
+
+    code
+      background: rgba(255, 255, 255, 0.06)
+      border: 1px solid rgba(255, 255, 255, 0.1)
+      border-radius: 4px
+      padding: 2px 8px
+      font-size: 12px
+      color: $mav-accent
+      font-family: monospace
+      user-select: all
+
+    @media screen and (max-width: 768px)
+      flex-direction: column
+      text-align: center
+      gap: 0.4rem
+      padding: 0.75rem 1rem
+
   // Tag page header tweaks
   .blog-tag-header
     padding-bottom: 2rem

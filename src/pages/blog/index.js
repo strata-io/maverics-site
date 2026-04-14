@@ -20,6 +20,21 @@ const BlogIndexPage = () => {
             navigate the complexities of modern IAM systems.
           </p>
         </div>
+        <div className="blog-mcp-banner">
+          <span className="blog-mcp-icon">&#9889;</span>
+          <span>
+            This blog is available as an{" "}
+            <a
+              href="https://modelcontextprotocol.io"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              MCP
+            </a>{" "}
+            endpoint.{" "}
+            <code>npx mcp-remote@next https://www.maverics.ai/mcp</code>
+          </span>
+        </div>
         <BlogRoll />
       </div>
     </Layout>

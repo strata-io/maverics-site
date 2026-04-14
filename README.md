@@ -92,6 +92,41 @@ That's it. No Google Docs, no copy-pasting, no WordPress.
 
 ---
 
+## MCP Endpoint
+
+The blog is available as an [MCP](https://modelcontextprotocol.io) (Model Context Protocol) endpoint. AI assistants like Claude can query blog content directly.
+
+**Endpoint:** `https://www.maverics.ai/mcp`
+
+**Tools available:**
+| Tool | Description |
+|------|-------------|
+| `listBlogs` | List all blog posts with title, date, author, category, description, and URL |
+| `getBlog` | Get the full content of a specific post by slug |
+
+**Connect from Claude Desktop:**
+
+Add this to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "maverics-blog": {
+      "command": "npx",
+      "args": ["mcp-remote@next", "https://www.maverics.ai/mcp"]
+    }
+  }
+}
+```
+
+**Test with MCP Inspector:**
+```bash
+npx @modelcontextprotocol/inspector npx mcp-remote@next https://www.maverics.ai/mcp
+```
+
+The blog data is generated at build time — every new blog post merged to `main` is automatically available via MCP.
+
+---
+
 ## Reference
 
 ### Stack
@@ -100,9 +135,10 @@ That's it. No Google Docs, no copy-pasting, no WordPress.
 |-------|------|
 | Framework | Gatsby 4 + React 18 |
 | CMS | Decap CMS (Git-based, no database) |
-| Styling | Bulma CSS + SASS |
+| Styling | SASS (custom design system) |
 | Deployment | Netlify (auto-builds on push to `main`) |
 | Code highlighting | Prism.js |
+| MCP Server | Netlify Function at `/mcp` |
 
 ### Commands
 
