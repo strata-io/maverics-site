@@ -88,8 +88,6 @@ You don't need to know Markdown, frontmatter, or Gatsby. Claude handles all of i
 6. **Post the PR in `#content-review-and-approvals`** for peer review
 7. **Once approved, merge the PR.** Netlify rebuilds automatically. It's live.
 
-That's it. No Google Docs, no copy-pasting, no WordPress.
-
 ---
 
 ## MCP Endpoint
