@@ -1,4 +1,7 @@
-// Base styles matched to production
+// Base reset — replaces Bulma's base module
+*, *::before, *::after
+  box-sizing: border-box
+
 html
   background-color: $mav-bg-primary
 
@@ -7,8 +10,14 @@ body
   color: $mav-text-primary
   font: 16px/1.6em $font-body
   letter-spacing: 0.1px
+  margin: 0
+  padding: 0
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+
+img
+  max-width: 100%
+  height: auto
 
 h1
   font-family: $font-body
@@ -75,6 +84,11 @@ a
 
 .container
   max-width: 1200px
+  margin-left: auto
+  margin-right: auto
+  padding-left: 2rem
+  padding-right: 2rem
+  width: 100%
 
 // Utility classes from production
 .font-size-20

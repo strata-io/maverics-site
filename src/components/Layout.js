@@ -2,7 +2,6 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import "../style/bulma-style.sass";
 import "../style/custom-style.sass";
 
 const Layout = ({ children }) => {
