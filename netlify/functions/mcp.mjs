@@ -1,6 +1,5 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { toFetchResponse, toReqRes } from "@modelcontextprotocol/sdk/server/fetch.js";
+import { McpServer } from "@modelcontextprotocol/sdk/dist/esm/server/mcp.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js";
 import { z } from "zod";
 import { createRequire } from "module";
 
@@ -98,7 +97,7 @@ function createServer() {
 }
 
 export default async (req) => {
-  // Only accept POST for MCP JSON-RPC
+  // GET returns server info
   if (req.method === "GET") {
     return new Response(
       JSON.stringify({
@@ -120,16 +119,12 @@ export default async (req) => {
 
   try {
     const server = createServer();
-    const transport = new StreamableHTTPServerTransport({
+    const transport = new WebStandardStreamableHTTPServerTransport({
       sessionIdGenerator: undefined, // stateless
     });
 
     await server.connect(transport);
-
-    const { req: nodeReq, res: nodeRes } = toReqRes(req);
-    await transport.handleRequest(nodeReq, nodeRes);
-
-    return toFetchResponse(nodeRes);
+    return await transport.handleRequest(req);
   } catch (error) {
     console.error("MCP error:", error);
     return new Response(
