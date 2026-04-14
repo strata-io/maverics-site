@@ -1,9 +1,12 @@
 [build]
-  command = "npm ci --legacy-peer-deps && npm run build"
+  command = "npm ci --legacy-peer-deps && node scripts/build-blog-data.js && npm run build"
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "20.15.0"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[plugins]]
   package = "@netlify/plugin-gatsby"
