@@ -17,13 +17,11 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "dependencies": {
-    "bulma": "^0.9.4",
     "decap-cms-app": "^3.3.3",
     "gatsby": "^4.25.0",
     "gatsby-plugin-decap-cms": "^4.0.0",
     "gatsby-plugin-image": "^2.25.0",
     "gatsby-plugin-netlify": "^5.1.0",
-    "gatsby-plugin-purgecss": "^6.2.1",
     "gatsby-plugin-react-helmet": "^5.25.0",
     "gatsby-plugin-sass": "^5.25.0",
     "gatsby-plugin-sharp": "^4.25.0",

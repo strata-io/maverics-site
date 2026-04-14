@@ -185,14 +185,19 @@
     margin: 5px 0
 
 @media screen and (max-width: 1023px)
-  .navbar-nav
-    display: none
-  .header-button
-    right: 70px
-  .navbar-burger
-    display: block
-    position: absolute
-    right: 20px
+  .navbar
+    height: 70px
+    padding: 0 16px
+    .navbar-nav
+      display: none
+    .header-button
+      display: none
+    .navbar-burger
+      display: block
+      position: fixed
+      right: 16px
+      top: 20px
+      z-index: 101
   .navbar-menu-mobile
     display: block
     position: fixed
