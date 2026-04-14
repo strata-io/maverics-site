@@ -1,5 +1,5 @@
-import { McpServer } from "@modelcontextprotocol/sdk/dist/esm/server/mcp.js";
-import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { z } from "zod";
 import { createRequire } from "module";
 
