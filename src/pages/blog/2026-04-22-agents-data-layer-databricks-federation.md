@@ -45,7 +45,7 @@ The sequence, end to end:
 4. Databricks returns a short-lived OAuth access token that identifies the user. Unity Catalog applies her existing permissions when the query runs.
 5. The query runs against Databricks under the user's identity. Databricks logs it. The gateway's audit log holds the full delegation chain — user, agent, tool call, time.
 
-Two properties matter to a CISO reading this flow:
+Two properties stand out:
 
 - **The acting party is carried through.** Databricks logs the user who initiated the query. The gateway log adds the agent that acted on her behalf. Put the two together and you get a delegation chain an incident responder can actually follow, instead of a shared service account.
 - **The agent holds nothing sensitive.** The gateway holds its signing key. The agent holds a short-lived access token good only for MCP tool calls at the gateway — never direct API access to the warehouse. There is no warehouse secret to steal from an agent container, which changes the threat model for prompt injection and supply-chain compromise.
@@ -79,9 +79,9 @@ The `act` claim is what the gateway logs for every exchange, and it's the part a
 
 This is the shape of delegated authority in mature enterprise identity systems. AWS IAM role assumption does it. Kubernetes impersonation does it. The difference with agents is that the acting party is software deciding what to do in real time, so a short TTL and tight audience restrictions matter more. RFC 8693 token exchange carries all three properties — identity, actor, attenuation — in a single standards-defined claim set.
 
-## Why This Matters at the Top
+## What Changes
 
-Five outcomes worth naming on a CISO or CIO slide:
+Five things change the day this pattern goes live:
 
 - **One revocation point.** Disable the user in the IdP and their agents lose warehouse access the same minute. No warehouse-side cleanup. No hunting for stale PATs in agent config.
 - **Every query attributable.** Databricks query history ties to the real user. The gateway audit log ties the specific agent and tool call to that same user. Compliance reviews get shorter. Incident forensics gets faster.
@@ -89,7 +89,7 @@ Five outcomes worth naming on a CISO or CIO slide:
 - **No credential sprawl.** Agents don't hold warehouse tokens. Rotating a PAT across forty agents stops being a recurring fire drill because there's nothing to rotate.
 - **Pattern reuse.** The gateway speaks RFC 8693 to Databricks, to Snowflake's OAuth federation, to Google Cloud's Security Token Service, and to any target that accepts OAuth 2.0 token exchange. You implement federation once and apply it across the data estate.
 
-Senior leaders don't need the protocol details on that slide. They need the shape of the risk posture change: the same identity system protecting employees now protects agent access, audit evidence becomes a byproduct rather than a project, and adding the next data platform doesn't restart the conversation.
+The identity system you already run for employees now runs for your agents. Audit evidence comes along for the ride. Adding the next data platform doesn't restart the conversation.
 
 ## What's Shipping and What's Next
 
@@ -101,7 +101,7 @@ The turnkey Databricks connector — the one that ships with a form, a policy te
 
 Agents without data access are a chat toy. Agents with unfederated data access are a pending incident. Token federation is the way past that binary. The data platform trusts your IdP. The gateway signs short-lived JWTs that carry the human on the line. Databricks and Snowflake both support the pattern. The Maverics AI Identity Gateway makes it consistent across them. Your agents get useful. Your audit log stays honest. Your incident-response team keeps sleeping through the night.
 
-That's the data layer story — and it's one senior leaders can finally approve.
+That's the data layer story — and it's one you can take into a security review without flinching.
 
 ## Further Reading
 
