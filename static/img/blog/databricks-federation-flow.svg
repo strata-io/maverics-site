@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="11">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#6f5eea"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#00CFC7"/>
+    </marker>
+    <marker id="arr-gold" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#FEE03B"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#AD83FF"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="720" fill="#0D172E" rx="8"/>
+
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" fill="#FEE03B" font-size="14" font-weight="bold">Federated Token Brokering — Databricks Account-Wide Token Federation</text>
+  <text x="450" y="46" text-anchor="middle" fill="#8899aa" font-size="10">Agent → Maverics AI Identity Gateway → Databricks Unity Catalog</text>
+
+  <!-- Column headers -->
+  <text x="120" y="72" text-anchor="middle" fill="#AD83FF" font-size="12" font-weight="bold">Agent</text>
+  <text x="120" y="88" text-anchor="middle" fill="#8899aa" font-size="9">ai-analyst-agent</text>
+
+  <text x="450" y="72" text-anchor="middle" fill="#00CFC7" font-size="12" font-weight="bold">Maverics AI Identity Gateway</text>
+  <text x="450" y="88" text-anchor="middle" fill="#8899aa" font-size="9">Federated Exchange · RFC 8693 issuer</text>
+
+  <text x="780" y="72" text-anchor="middle" fill="#AD83FF" font-size="12" font-weight="bold">Databricks Account</text>
+  <text x="780" y="88" text-anchor="middle" fill="#8899aa" font-size="9">Federation policy · Unity Catalog</text>
+
+  <!-- Lifelines -->
+  <line x1="120" y1="100" x2="120" y2="640" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="450" y1="100" x2="450" y2="640" stroke="#00CFC7" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="780" y1="100" x2="780" y2="640" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+
+  <!-- Trust relationship banner -->
+  <rect x="50" y="108" width="800" height="22" rx="4" fill="#6f5eea" fill-opacity="0.12" stroke="#6f5eea" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="450" y="123" text-anchor="middle" fill="#AD83FF" font-size="9">Prereq: Databricks account federation policy trusts iss = https://gateway.acme.com · aud = databricks</text>
+
+  <!-- Step 1: Agent calls tool -->
+  <rect x="50" y="145" width="140" height="42" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
+  <text x="120" y="161" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">1. MCP tool call</text>
+  <text x="120" y="177" text-anchor="middle" fill="#8899aa" font-size="8">+ Alice's access token (JWT)</text>
+
+  <line x1="190" y1="166" x2="380" y2="166" stroke="#6f5eea" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="285" y="160" text-anchor="middle" fill="#8899aa" font-size="8">run_query</text>
+
+  <!-- Step 2: Gateway validates user JWT -->
+  <rect x="380" y="200" width="140" height="60" rx="4" fill="#00CFC7" fill-opacity="0.1" stroke="#00CFC7" stroke-width="1"/>
+  <text x="450" y="216" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">2. Validate user JWT</text>
+  <text x="450" y="232" text-anchor="middle" fill="#8899aa" font-size="8">sub: alice@acme.com</text>
+  <text x="450" y="246" text-anchor="middle" fill="#8899aa" font-size="8">aud: gateway.acme.com</text>
+
+  <!-- Step 3: Mint delegation JWT -->
+  <rect x="380" y="275" width="140" height="90" rx="4" fill="#00CFC7" fill-opacity="0.1" stroke="#00CFC7" stroke-width="1"/>
+  <text x="450" y="291" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">3. Mint delegation JWT</text>
+  <text x="450" y="307" text-anchor="middle" fill="#8899aa" font-size="8">sub: alice@acme.com</text>
+  <text x="450" y="321" text-anchor="middle" fill="#8899aa" font-size="8">act.sub: ai-analyst-agent</text>
+  <text x="450" y="335" text-anchor="middle" fill="#8899aa" font-size="8">aud: databricks</text>
+  <text x="450" y="349" text-anchor="middle" fill="#FEE03B" font-size="8">exp: 60 seconds</text>
+
+  <!-- Step 4: RFC 8693 exchange (hero) -->
+  <text x="615" y="385" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">4. RFC 8693 Token Exchange</text>
+  <text x="615" y="400" text-anchor="middle" fill="#8899aa" font-size="8">grant_type = urn:ietf:params:oauth:grant-type:token-exchange</text>
+  <text x="615" y="412" text-anchor="middle" fill="#8899aa" font-size="8">subject_token = delegation JWT · audience = databricks</text>
+  <line x1="520" y1="420" x2="710" y2="420" stroke="#FEE03B" stroke-width="2" marker-end="url(#arr-gold)"/>
+
+  <!-- Step 5: Databricks validates and issues native token -->
+  <rect x="690" y="438" width="200" height="88" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
+  <text x="790" y="454" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">5. Validate JWT · Issue token</text>
+  <text x="790" y="470" text-anchor="middle" fill="#8899aa" font-size="8">Check iss / aud / sub against</text>
+  <text x="790" y="482" text-anchor="middle" fill="#8899aa" font-size="8">federation policy</text>
+  <text x="790" y="500" text-anchor="middle" fill="#8899aa" font-size="8">→ Databricks OAuth token for Alice</text>
+  <text x="790" y="514" text-anchor="middle" fill="#8899aa" font-size="8">Unity Catalog enforces access</text>
+
+  <!-- Return native token -->
+  <line x1="690" y1="540" x2="520" y2="540" stroke="#AD83FF" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-purple)"/>
+  <text x="605" y="534" text-anchor="middle" fill="#8899aa" font-size="8">Databricks OAuth access token</text>
+
+  <!-- Step 6: Run query -->
+  <line x1="520" y1="555" x2="710" y2="555" stroke="#00CFC7" stroke-width="2" marker-end="url(#arr-teal)"/>
+  <text x="615" y="549" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">6. Run query · Authorization: Bearer &lt;dbx-token&gt;</text>
+
+  <!-- Databricks executes -->
+  <rect x="710" y="568" width="160" height="42" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
+  <text x="790" y="584" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">Execute query</text>
+  <text x="790" y="600" text-anchor="middle" fill="#FEE03B" font-size="8">Logged as alice@acme.com</text>
+
+  <!-- Return rows to gateway then to agent -->
+  <line x1="710" y1="625" x2="520" y2="625" stroke="#AD83FF" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arr-purple)"/>
+  <line x1="380" y1="625" x2="190" y2="625" stroke="#6f5eea" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+  <text x="285" y="620" text-anchor="middle" fill="#8899aa" font-size="8">rows (MCP tool result)</text>
+  <text x="615" y="620" text-anchor="middle" fill="#8899aa" font-size="8">query rows</text>
+
+  <!-- Audit callout -->
+  <rect x="50" y="660" width="800" height="44" rx="4" fill="#FEE03B" fill-opacity="0.08" stroke="#FEE03B" stroke-width="1"/>
+  <text x="450" y="676" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">Outcome: agent holds no warehouse credential · delegation JWT TTL ≈ 60s · Databricks token issued for Alice</text>
+  <text x="450" y="692" text-anchor="middle" fill="#8899aa" font-size="9">Databricks logs the user · gateway log preserves act.sub (the agent) · revoke the user in the IdP and access ends the same minute</text>
+</svg>
