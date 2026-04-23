@@ -91,12 +91,6 @@ Five things change the day this pattern goes live:
 
 The identity system you already run for employees now runs for your agents. Audit evidence comes along for the ride. Adding the next data platform doesn't restart the conversation.
 
-## What's Shipping and What's Next
-
-Federated Exchange is in the Maverics Orchestrator today, with documented support for Databricks Workload Identity Federation and Google Cloud's workload identity federation. We recently extended it to Databricks account-wide token federation in a proof of concept with a Fortune 100 financial services customer. The pattern worked end to end: their users logged into Databricks through their own IdP, the gateway brokered each agent query as that user, and every query carried the human on the audit line. The customer came away more confident about SaaS interoperability than they started.
-
-The turnkey Databricks connector — the one that ships with a form, a policy template, and documentation — is planned for the Maverics product over the next few weeks. Customers who want to shape that design while the POC is still wet are the ones to talk to now.
-
 ## The Short Version
 
 Agents without data access are a chat toy. Agents with unfederated data access are a pending incident. Token federation is the way past that binary. The data platform trusts your IdP. The gateway signs short-lived JWTs that carry the human on the line. Databricks and Snowflake both support the pattern. The Maverics AI Identity Gateway makes it consistent across them. Your agents get useful. Your audit log stays honest. Your incident-response team keeps sleeping through the night.
