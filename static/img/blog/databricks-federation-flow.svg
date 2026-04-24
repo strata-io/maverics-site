@@ -1,116 +1,168 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="11">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1080" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace" font-size="11">
   <defs>
-    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#6f5eea"/>
-    </marker>
-    <marker id="arr-teal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#00CFC7"/>
+    <marker id="arr-w" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#D8DEE9"/>
     </marker>
     <marker id="arr-gold" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#FEE03B"/>
     </marker>
-    <marker id="arr-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#AD83FF"/>
-    </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="900" height="760" fill="#0D172E" rx="8"/>
+  <rect width="1240" height="1080" fill="#0D172E" rx="8"/>
 
-  <!-- Title -->
-  <text x="450" y="28" text-anchor="middle" fill="#FEE03B" font-size="14" font-weight="bold">Federated Token Brokering for Databricks Account-Wide Token Federation</text>
-  <text x="450" y="46" text-anchor="middle" fill="#8899aa" font-size="10">Agent · Maverics Gateway · Maverics Authorization Server · Databricks</text>
+  <!-- Top actor boxes -->
+  <!-- User Agent: stick figure -->
+  <circle cx="60" cy="32" r="8" fill="none" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="40" x2="60" y2="58" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="48" x2="50" y2="54" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="48" x2="70" y2="54" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="58" x2="52" y2="68" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="58" x2="68" y2="68" stroke="#AD83FF" stroke-width="1.5"/>
+  <text x="60" y="86" text-anchor="middle" fill="#AD83FF" font-size="10" font-weight="bold">User Agent</text>
 
-  <!-- Column headers -->
-  <text x="120" y="72" text-anchor="middle" fill="#AD83FF" font-size="12" font-weight="bold">Agent</text>
-  <text x="120" y="88" text-anchor="middle" fill="#8899aa" font-size="9">ai-analyst-agent</text>
+  <!-- Agent -->
+  <rect x="140" y="20" width="100" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="190" y="42" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Agent</text>
+  <text x="190" y="58" text-anchor="middle" fill="#8899aa" font-size="9">ai-analyst-agent</text>
 
-  <text x="360" y="72" text-anchor="middle" fill="#00CFC7" font-size="12" font-weight="bold">Maverics Gateway</text>
-  <text x="360" y="88" text-anchor="middle" fill="#8899aa" font-size="9">MCP proxy · inbound authz</text>
+  <!-- Gateway -->
+  <rect x="280" y="20" width="200" height="50" rx="6" fill="#0D0F12" stroke="#00CFC7" stroke-width="1"/>
+  <text x="380" y="42" text-anchor="middle" fill="#00CFC7" font-size="11" font-weight="bold">Maverics Gateway</text>
+  <text x="380" y="58" text-anchor="middle" fill="#8899aa" font-size="9">MCP proxy · inbound authz</text>
 
-  <text x="580" y="72" text-anchor="middle" fill="#6f5eea" font-size="12" font-weight="bold">Maverics Auth Server</text>
-  <text x="580" y="88" text-anchor="middle" fill="#8899aa" font-size="9">Token issuer · Federated Exchange</text>
+  <!-- Databricks MCP -->
+  <rect x="520" y="20" width="160" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="600" y="42" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Databricks MCP</text>
+  <text x="600" y="58" text-anchor="middle" fill="#8899aa" font-size="9">MCP server</text>
 
-  <text x="800" y="72" text-anchor="middle" fill="#AD83FF" font-size="12" font-weight="bold">Databricks</text>
-  <text x="800" y="88" text-anchor="middle" fill="#8899aa" font-size="9">Federation policy · Unity Catalog</text>
+  <!-- Maverics Authorization Server -->
+  <rect x="720" y="20" width="220" height="50" rx="6" fill="#0D0F12" stroke="#6f5eea" stroke-width="1"/>
+  <text x="830" y="42" text-anchor="middle" fill="#6f5eea" font-size="11" font-weight="bold">Maverics Authorization Server</text>
+  <text x="830" y="58" text-anchor="middle" fill="#8899aa" font-size="9">Token issuer · Federated Exchange</text>
+
+  <!-- Databricks Authorization Server -->
+  <rect x="980" y="20" width="240" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="1100" y="42" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Databricks Authorization Server</text>
+  <text x="1100" y="58" text-anchor="middle" fill="#8899aa" font-size="9">Federation policy · STS endpoint</text>
 
   <!-- Lifelines -->
-  <line x1="120" y1="105" x2="120" y2="665" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
-  <line x1="360" y1="105" x2="360" y2="665" stroke="#00CFC7" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
-  <line x1="580" y1="105" x2="580" y2="665" stroke="#6f5eea" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
-  <line x1="800" y1="105" x2="800" y2="665" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="60" y1="95" x2="60" y2="980" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
+  <line x1="190" y1="75" x2="190" y2="980" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
+  <line x1="380" y1="75" x2="380" y2="980" stroke="#00CFC7" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
+  <line x1="600" y1="75" x2="600" y2="980" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
+  <line x1="830" y1="75" x2="830" y2="980" stroke="#6f5eea" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
+  <line x1="1100" y1="75" x2="1100" y2="980" stroke="#AD83FF" stroke-width="1" stroke-dasharray="4,4" opacity="0.35"/>
 
-  <!-- Prereq banner -->
-  <rect x="40" y="115" width="820" height="22" rx="4" fill="#6f5eea" fill-opacity="0.12" stroke="#6f5eea" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="450" y="130" text-anchor="middle" fill="#AD83FF" font-size="9">Prereq: Databricks federation policy trusts iss = https://auth.acme.com (Maverics AS) · aud = https://databricks.com</text>
+  <!-- Phase 1: Auth band -->
+  <rect x="40" y="105" width="1180" height="28" rx="4" fill="#6f5eea" fill-opacity="0.16" stroke="#6f5eea" stroke-width="0.5"/>
+  <text x="630" y="123" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Auth</text>
 
-  <!-- Step 1: Agent → Gateway -->
-  <rect x="50" y="150" width="140" height="38" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
-  <text x="120" y="166" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">1. MCP tool call</text>
-  <text x="120" y="180" text-anchor="middle" fill="#8899aa" font-size="8">+ user access token (JWT)</text>
+  <!-- Step: UA -> Agent "Initiate session" -->
+  <line x1="60" y1="165" x2="190" y2="165" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="125" y="159" text-anchor="middle" fill="#D8DEE9" font-size="10">Initiate session</text>
 
-  <line x1="190" y1="169" x2="290" y2="169" stroke="#6f5eea" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="240" y="163" text-anchor="middle" fill="#8899aa" font-size="8">run_query</text>
+  <!-- Step: Agent -> UA "Redirect for authentication" -->
+  <line x1="190" y1="200" x2="60" y2="200" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="125" y="194" text-anchor="middle" fill="#D8DEE9" font-size="10">Redirect for authentication</text>
 
-  <!-- Step 2: Gateway inbound authz -->
-  <rect x="290" y="200" width="140" height="38" rx="4" fill="#00CFC7" fill-opacity="0.1" stroke="#00CFC7" stroke-width="1"/>
-  <text x="360" y="216" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">2. Inbound authz policy</text>
-  <text x="360" y="230" text-anchor="middle" fill="#8899aa" font-size="8">allow / deny this tool call</text>
+  <!-- Step: UA -> Gateway "Authentication request" -->
+  <line x1="60" y1="235" x2="380" y2="235" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="220" y="229" text-anchor="middle" fill="#D8DEE9" font-size="10">Authentication request</text>
 
-  <!-- Step 3: Gateway → AS -->
-  <line x1="430" y1="260" x2="510" y2="260" stroke="#6f5eea" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="470" y="254" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">3. Token exchange request</text>
-  <text x="470" y="272" text-anchor="middle" fill="#8899aa" font-size="8">audience = https://databricks.com</text>
+  <!-- Step: Gateway -> Maverics AS "Authentication request" -->
+  <line x1="380" y1="270" x2="830" y2="270" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="605" y="264" text-anchor="middle" fill="#D8DEE9" font-size="10">Authentication request</text>
 
-  <!-- Step 4: AS mint JWT -->
-  <rect x="510" y="285" width="140" height="95" rx="4" fill="#6f5eea" fill-opacity="0.1" stroke="#6f5eea" stroke-width="1"/>
-  <text x="580" y="301" text-anchor="middle" fill="#6f5eea" font-size="9" font-weight="bold">4. Mint delegation JWT</text>
-  <text x="580" y="317" text-anchor="middle" fill="#8899aa" font-size="8">iss: auth.acme.com</text>
-  <text x="580" y="331" text-anchor="middle" fill="#8899aa" font-size="8">sub: alice@acme.com</text>
-  <text x="580" y="345" text-anchor="middle" fill="#8899aa" font-size="8">act.sub: ai-analyst-agent</text>
-  <text x="580" y="359" text-anchor="middle" fill="#8899aa" font-size="8">aud: https://databricks.com</text>
-  <text x="580" y="373" text-anchor="middle" fill="#FEE03B" font-size="8">exp: 60 seconds</text>
+  <!-- Self-loop: Maverics AS "Evaluate authentication policy" -->
+  <text x="830" y="300" text-anchor="middle" fill="#D8DEE9" font-size="10">Evaluate authentication policy</text>
+  <path d="M 830 310 C 890 310 890 345 830 345" fill="none" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
 
-  <!-- Step 5: AS → Databricks RFC 8693 (HERO) -->
-  <text x="690" y="398" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">5. RFC 8693 Token Exchange</text>
-  <text x="690" y="412" text-anchor="middle" fill="#8899aa" font-size="8">grant_type = urn:ietf:params:oauth:grant-type:token-exchange</text>
-  <text x="690" y="424" text-anchor="middle" fill="#8899aa" font-size="8">subject_token = delegation JWT</text>
-  <line x1="650" y1="432" x2="730" y2="432" stroke="#FEE03B" stroke-width="2" marker-end="url(#arr-gold)"/>
+  <!-- Step: Maverics AS -> UA "Authentication response" -->
+  <line x1="830" y1="380" x2="60" y2="380" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="445" y="374" text-anchor="middle" fill="#D8DEE9" font-size="10">Authentication response</text>
 
-  <!-- Step 6: Databricks validate + issue -->
-  <rect x="730" y="448" width="140" height="78" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
-  <text x="800" y="464" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">6. Validate + issue</text>
-  <text x="800" y="480" text-anchor="middle" fill="#8899aa" font-size="8">Check iss / aud / sub</text>
-  <text x="800" y="492" text-anchor="middle" fill="#8899aa" font-size="8">against federation policy</text>
-  <text x="800" y="508" text-anchor="middle" fill="#8899aa" font-size="8">Return Databricks OAuth</text>
-  <text x="800" y="520" text-anchor="middle" fill="#8899aa" font-size="8">token for Alice</text>
+  <!-- Phase 2: MCP Proxy band -->
+  <rect x="40" y="405" width="1180" height="28" rx="4" fill="#00CFC7" fill-opacity="0.16" stroke="#00CFC7" stroke-width="0.5"/>
+  <text x="630" y="423" text-anchor="middle" fill="#00CFC7" font-size="11" font-weight="bold">MCP Proxy to Databricks MCP</text>
 
-  <!-- Step 7: Databricks → AS (return) -->
-  <line x1="730" y1="540" x2="650" y2="540" stroke="#AD83FF" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr-purple)"/>
-  <text x="690" y="534" text-anchor="middle" fill="#8899aa" font-size="8">Databricks access token</text>
+  <!-- Step: UA -> Agent "Prompt agent to load data" -->
+  <line x1="60" y1="465" x2="190" y2="465" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="125" y="459" text-anchor="middle" fill="#D8DEE9" font-size="10">Prompt agent to load data</text>
 
-  <!-- Step 8: AS → Gateway (passthrough) -->
-  <line x1="510" y1="560" x2="430" y2="560" stroke="#6f5eea" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
-  <text x="470" y="554" text-anchor="middle" fill="#8899aa" font-size="8">forward to gateway</text>
+  <!-- Step: Agent -> Gateway "Tool request" -->
+  <line x1="190" y1="500" x2="380" y2="500" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="285" y="494" text-anchor="middle" fill="#D8DEE9" font-size="10">Tool request</text>
 
-  <!-- Step 9: Gateway → Databricks with token -->
-  <line x1="430" y1="585" x2="730" y2="585" stroke="#00CFC7" stroke-width="2" marker-end="url(#arr-teal)"/>
-  <text x="580" y="579" text-anchor="middle" fill="#00CFC7" font-size="9" font-weight="bold">9. Forward tool request · Authorization: Bearer &lt;dbx-token&gt;</text>
+  <!-- Self-loop: Gateway "Evaluate inbound authorization policy" -->
+  <text x="380" y="528" text-anchor="middle" fill="#D8DEE9" font-size="10">Evaluate inbound authorization policy</text>
+  <path d="M 380 538 C 440 538 440 573 380 573" fill="none" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
 
-  <!-- Step 10: Databricks execute -->
-  <rect x="730" y="600" width="140" height="38" rx="4" fill="#AD83FF" fill-opacity="0.1" stroke="#AD83FF" stroke-width="1"/>
-  <text x="800" y="616" text-anchor="middle" fill="#AD83FF" font-size="9" font-weight="bold">10. Execute query</text>
-  <text x="800" y="630" text-anchor="middle" fill="#FEE03B" font-size="8">Logged as alice@acme.com</text>
+  <!-- Step: Gateway -> Maverics AS "Token exchange request (audience=https://databricks.com)" -->
+  <line x1="380" y1="608" x2="830" y2="608" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="605" y="602" text-anchor="middle" fill="#D8DEE9" font-size="10">Token exchange request (audience=https://databricks.com)</text>
 
-  <!-- Step 11: Return cascade -->
-  <line x1="730" y1="655" x2="430" y2="655" stroke="#AD83FF" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arr-purple)"/>
-  <line x1="290" y1="655" x2="190" y2="655" stroke="#6f5eea" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arr)"/>
-  <text x="580" y="649" text-anchor="middle" fill="#8899aa" font-size="8">query rows</text>
-  <text x="240" y="649" text-anchor="middle" fill="#8899aa" font-size="8">tool result</text>
+  <!-- Self-loop: Maverics AS "Evaluate token brokering policy (map scopes and claims)" -->
+  <text x="830" y="638" text-anchor="middle" fill="#D8DEE9" font-size="10">Evaluate token brokering policy</text>
+  <text x="830" y="651" text-anchor="middle" fill="#8899aa" font-size="9">(map scopes and claims)</text>
+  <path d="M 830 661 C 890 661 890 696 830 696" fill="none" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
 
-  <!-- Audit callout -->
-  <rect x="40" y="690" width="820" height="50" rx="4" fill="#FEE03B" fill-opacity="0.08" stroke="#FEE03B" stroke-width="1"/>
-  <text x="450" y="708" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">Outcome: agent holds no warehouse credential · delegation JWT TTL ≈ 60s · Databricks token issued for the user</text>
-  <text x="450" y="724" text-anchor="middle" fill="#8899aa" font-size="9">Databricks logs the user · Maverics Authorization Server records act.sub (the agent)</text>
-  <text x="450" y="736" text-anchor="middle" fill="#8899aa" font-size="9">Revoke the user in the IdP and access ends the same minute</text>
+  <!-- Self-loop: Maverics AS "Mint ephemeral token" (HERO-ish) -->
+  <text x="830" y="720" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">Mint ephemeral token</text>
+  <text x="830" y="733" text-anchor="middle" fill="#8899aa" font-size="9">(iss=auth.acme.com, aud=https://databricks.com,</text>
+  <text x="830" y="745" text-anchor="middle" fill="#8899aa" font-size="9">sub=joe@example.com, act.sub=ai-analyst-agent)</text>
+  <path d="M 830 755 C 890 755 890 790 830 790" fill="none" stroke="#FEE03B" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+
+  <!-- Step: Maverics AS -> Databricks AS "Token exchange request" -->
+  <line x1="830" y1="815" x2="1100" y2="815" stroke="#FEE03B" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+  <text x="965" y="809" text-anchor="middle" fill="#FEE03B" font-size="10" font-weight="bold">RFC 8693 token exchange</text>
+
+  <!-- Step: Databricks AS -> Maverics AS "Token exchange response" -->
+  <line x1="1100" y1="850" x2="830" y2="850" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="965" y="844" text-anchor="middle" fill="#D8DEE9" font-size="10">Token exchange response</text>
+
+  <!-- Step: Maverics AS -> Gateway "Token exchange response (with Databricks access token)" -->
+  <line x1="830" y1="885" x2="380" y2="885" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="605" y="879" text-anchor="middle" fill="#D8DEE9" font-size="10">Token exchange response (with Databricks access token)</text>
+
+  <!-- Step: Gateway -> Databricks MCP "Tool request" -->
+  <line x1="380" y1="920" x2="600" y2="920" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="490" y="914" text-anchor="middle" fill="#D8DEE9" font-size="10">Tool request · Authorization: Bearer &lt;dbx-token&gt;</text>
+
+  <!-- Step: Databricks MCP -> Gateway "Tool response" -->
+  <line x1="600" y1="955" x2="380" y2="955" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="490" y="949" text-anchor="middle" fill="#D8DEE9" font-size="10">Tool response</text>
+
+  <!-- Step: Gateway -> Agent "Tool response" -->
+  <line x1="380" y1="980" x2="190" y2="980" stroke="#D8DEE9" stroke-width="1.5" marker-end="url(#arr-w)"/>
+  <text x="285" y="974" text-anchor="middle" fill="#D8DEE9" font-size="10">Tool response</text>
+
+  <!-- Bottom actor boxes (duplicate of top) -->
+  <circle cx="60" cy="1012" r="8" fill="none" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="1020" x2="60" y2="1038" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="1028" x2="50" y2="1034" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="1028" x2="70" y2="1034" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="1038" x2="52" y2="1048" stroke="#AD83FF" stroke-width="1.5"/>
+  <line x1="60" y1="1038" x2="68" y2="1048" stroke="#AD83FF" stroke-width="1.5"/>
+  <text x="60" y="1066" text-anchor="middle" fill="#AD83FF" font-size="10" font-weight="bold">User Agent</text>
+
+  <rect x="140" y="1000" width="100" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="190" y="1022" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Agent</text>
+  <text x="190" y="1038" text-anchor="middle" fill="#8899aa" font-size="9">ai-analyst-agent</text>
+
+  <rect x="280" y="1000" width="200" height="50" rx="6" fill="#0D0F12" stroke="#00CFC7" stroke-width="1"/>
+  <text x="380" y="1022" text-anchor="middle" fill="#00CFC7" font-size="11" font-weight="bold">Maverics Gateway</text>
+  <text x="380" y="1038" text-anchor="middle" fill="#8899aa" font-size="9">MCP proxy · inbound authz</text>
+
+  <rect x="520" y="1000" width="160" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="600" y="1022" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Databricks MCP</text>
+  <text x="600" y="1038" text-anchor="middle" fill="#8899aa" font-size="9">MCP server</text>
+
+  <rect x="720" y="1000" width="220" height="50" rx="6" fill="#0D0F12" stroke="#6f5eea" stroke-width="1"/>
+  <text x="830" y="1022" text-anchor="middle" fill="#6f5eea" font-size="11" font-weight="bold">Maverics Authorization Server</text>
+  <text x="830" y="1038" text-anchor="middle" fill="#8899aa" font-size="9">Token issuer · Federated Exchange</text>
+
+  <rect x="980" y="1000" width="240" height="50" rx="6" fill="#0D0F12" stroke="#AD83FF" stroke-width="1"/>
+  <text x="1100" y="1022" text-anchor="middle" fill="#AD83FF" font-size="11" font-weight="bold">Databricks Authorization Server</text>
+  <text x="1100" y="1038" text-anchor="middle" fill="#8899aa" font-size="9">Federation policy · STS endpoint</text>
 </svg>
