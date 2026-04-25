@@ -105,14 +105,13 @@ A future post will cover Bedrock at the data layer. The pattern repeats. Differe
 The companion repository has the full lab. Clone it, run `make init && make up`, start `cloudflared` for the public hostnames, and follow the README to wire up AgentCore. The README walks through AWS account setup for readers without an existing account, model access for Claude 3.5 Sonnet on Bedrock, Cloudflare Tunnel configuration, and the AgentCore CLI calls that build the gateway and the agent.
 
 ```
-git clone <repo-url>
-cd connect-bedrock-to-maverics
+git clone https://github.com/nickgamb-strata/connect-aws-bedrock-to-maverics.git
+cd connect-aws-bedrock-to-maverics
 make init && make up
-make tunnel       # in another terminal
-bash scripts/agentcore-setup.sh
+make tunnel                       # in another terminal
+make agentcore-bootstrap          # one-time IAM role
+make agentcore-up                 # gateway + target (3LO)
 ```
-
-The repo URL goes here once the project is published.
 
 ## Further Reading
 
