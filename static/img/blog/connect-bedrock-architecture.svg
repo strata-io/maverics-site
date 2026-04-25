@@ -114,8 +114,8 @@
   <text x="120" y="434" text-anchor="middle" fill="#8899aa" font-size="9">bedrock-agentcore</text>
   <text x="120" y="448" text-anchor="middle" fill="#8899aa" font-size="8">3LO + 2LO grants</text>
 
-  <!-- Connector dashed line from new client to OIDC Provider -->
-  <line x1="190" y1="430" x2="455" y2="430" stroke="#FEE03B" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Connector dashed line from new client to OIDC Provider, routed below Keycloak -->
+  <path d="M 120 465 L 120 482 L 565 482 L 565 465" fill="none" stroke="#FEE03B" stroke-width="1" stroke-dasharray="4,3"/>
 
   <!-- Legend -->
   <text x="40" y="510" fill="#FEE03B" font-size="9" font-weight="bold">■ New for Bedrock</text>
