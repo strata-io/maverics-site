@@ -39,7 +39,7 @@ Databricks shipped a piece of this puzzle called [account-wide token federation]
 
 That flips the access model. Instead of provisioning warehouse credentials to every system that needs data, you provision trust to one issuer and let the IdP do the rest. When someone joins, their IdP account is the only thing that changes. When they leave, one deprovision removes warehouse access. Role changes, permission reviews, MFA requirements all stay in the tool your identity team already runs.
 
-Snowflake gets to the same end state through a different mechanism. Snowflake's External OAuth accepts an IdP-issued JWT directly as its access token, with no platform-side exchange step. The Maverics gateway can broker either shape, but Databricks' STS endpoint is distinctive, and it's what the rest of this post focuses on.
+Other data platforms have their own shapes for federation. Snowflake's External OAuth accepts an IdP-issued JWT directly as its access token, with no platform-side exchange step. Databricks' STS endpoint is distinctive among the major platforms, and it's what the rest of this post focuses on.
 
 ## Where the Maverics AI Identity Gateway Fits
 
@@ -96,7 +96,7 @@ Five things change the day this pattern goes live:
 - **Every query attributable.** Databricks query history ties to the real user. The Maverics audit log ties the specific agent and tool call to that same user. Compliance reviews get shorter. Incident forensics gets faster.
 - **Least privilege by default.** The human's Unity Catalog permissions are the ceiling. An agent cannot exceed what the person driving it is allowed to see. Role-based access control you already designed applies to agents without a second system to maintain.
 - **No credential sprawl.** Agents don't hold warehouse tokens. Rotating a PAT across forty agents stops being a recurring fire drill because there's nothing to rotate.
-- **Pattern reuse.** The Maverics Authorization Server mints JWTs for Google Cloud's Security Token Service via RFC 8693, and for Snowflake's External OAuth flow even though the mechanism on the platform side is different. You implement federation once in Strata and apply it across the data estate.
+- **Pattern reuse.** The Maverics Authorization Server mints JWTs for Google Cloud's Security Token Service via RFC 8693 alongside Databricks. The same brokering primitives apply as more platforms expose RFC 8693 endpoints. You implement federation once in Strata and apply it across the data estate.
 
 The identity system you already run for employees now runs for your agents. Audit evidence comes along for the ride. Adding the next data platform doesn't restart the conversation.
 
