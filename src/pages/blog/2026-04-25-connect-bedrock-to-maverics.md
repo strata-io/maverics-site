@@ -3,7 +3,7 @@ templateKey: blog-post
 title: "Connect AWS Bedrock AgentCore to an OAuth-Protected MCP Server: A Step-by-Step Tutorial"
 date: 2026-04-25T00:00:00.000Z
 author: Nick Gamb
-description: "Step-by-step tutorial: connect an AWS Bedrock AgentCore agent to a Maverics-protected MCP server using OAuth 2.0 Authorization Code with PKCE, RFC 8693 token exchange, and a Cloudflare Tunnel. End-user identity reaches every tool call."
+description: "Step-by-step tutorial: connect an AWS Bedrock AgentCore Gateway to a Maverics-protected MCP server using OAuth 2.0 Client Credentials, RFC 8693 token exchange, OPA inbound policy, and a Cloudflare Tunnel. Verified end-to-end with a working demo script."
 featuredpost: true
 featuredimage: /img/blog/connect-bedrock-hero.png
 category: Agentic Identity
@@ -15,7 +15,7 @@ tags:
   - Identity Gateway
 ---
 
-**TL;DR.** A year ago Anthropic's MCP spec was a curiosity. Today it is the default integration surface for agent tools. AWS shipped Bedrock AgentCore at re:Invent 2025 with native MCP client support. This post takes the [Maverics AI Identity Gateway lab from the prior tutorial](/blog/agentic-identity/your-mcp-server-is-a-resource-server-now-act-like-it/), exposes it over a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/), and wires a Bedrock AgentCore agent to it through [OAuth 2.0 Authorization Code](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-oauth.html) with PKCE. End-user identity flows through the agent, into the gateway, and onto every audit line. Backends, OPA policies, and Maverics' OAuth posture do not change. Different agent client, same gateway. Clone the [companion repo](https://github.com/nickgamb-strata/connect-aws-bedrock-to-maverics), follow the steps below, and watch the delegation chain.
+**TL;DR.** A year ago Anthropic's MCP spec was a curiosity. Today it is the default integration surface for agent tools. AWS shipped Bedrock AgentCore at re:Invent 2025 with native MCP client support. This post takes the [Maverics AI Identity Gateway lab from the prior tutorial](/blog/agentic-identity/your-mcp-server-is-a-resource-server-now-act-like-it/), exposes it over a [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/), and wires a Bedrock AgentCore Gateway to it through [OAuth 2.0 Client Credentials](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-outbound-auth.html) and RFC 8693 token exchange. Backends, OPA policies, and Maverics' OAuth posture do not change. Different agent client, same gateway. Clone the [companion repo](https://github.com/nickgamb-strata/connect-aws-bedrock-to-maverics), follow the steps below, and run the included demo to watch the chain land in the audit log.
 
 ---
 
@@ -123,7 +123,7 @@ Two files differ from the prior tutorial.
       - name: audit:read
 ```
 
-Both grant types are enabled on the same client so the same OIDC app supports the 3LO walkthrough and the 2LO sidebar. `allowedAudiences` lists the lab hostname and the public Cloudflare Tunnel hostname so AgentCore-issued tokens validate.
+Both grant types are enabled on the same client so the OIDC app can support both flows down the road. `allowedAudiences` lists the lab hostname and the public Cloudflare Tunnel hostname so explicit `resource`-bound token requests validate.
 
 ### The gateway accepts the public audience
 
@@ -275,12 +275,14 @@ AGENTCORE_ROLE_ARN=arn:aws:iam::<account>:role/bedrock-agentcore-maverics-role
 
 ## Set Up the Gateway and Target
 
-The 3LO setup script does three AWS calls and pauses once for you to register a callback URL. Run it:
+The setup script makes three AWS calls. Run it:
 
 ```bash
 source .env
 make agentcore-up
 ```
+
+The verified-working tutorial path uses **2LO Client Credentials**. The agent authenticates as a service identity, not as a specific human. 3LO Authorization Code is a natural extension once Maverics' OIDC issuer is aligned with the public Cloudflare hostname (so AgentCore's `CUSTOM_JWT` authorizer can validate the iss claim). That alignment is out of scope for the lab.
 
 ### Step 1: OAuth2 credential provider
 
@@ -304,17 +306,11 @@ make agentcore-up
 }
 ```
 
-The response includes a `credentialProviderArn` and a `callbackUrl`. The script prints both and pauses. Add the callback URL to the `bedrock-agentcore` client's `redirectURLs` in `orchestrator/oidc-provider/maverics.yaml`, then restart the OIDC Provider so Maverics will accept it on the redirect leg:
-
-```bash
-docker compose restart oidc-config-merge oidc-provider
-```
-
-Press enter in the script terminal to continue.
+The response includes a `credentialProviderArn`. The script captures it.
 
 ### Step 2: Gateway
 
-[`create-gateway`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway.html) creates the AgentCore Gateway. We use `--protocol-type MCP` and `--authorizer-type NONE` because we are not putting an authorizer in front of AgentCore itself, only consuming an external MCP server:
+[`create-gateway`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway.html) creates the AgentCore Gateway. The script uses `--authorizer-type NONE` (we are consuming an external MCP server, not exposing one) and `--exception-level DEBUG` so tool-call errors come back with detailed messages instead of "An internal error occurred":
 
 ```bash
 aws bedrock-agentcore-control create-gateway \
@@ -322,14 +318,15 @@ aws bedrock-agentcore-control create-gateway \
   --name "${AGENTCORE_GATEWAY_NAME}" \
   --role-arn "${AGENTCORE_ROLE_ARN}" \
   --protocol-type MCP \
-  --authorizer-type NONE
+  --authorizer-type NONE \
+  --exception-level DEBUG
 ```
 
-The response includes `gatewayId`. The script captures it.
+The response includes `gatewayId` and `gatewayUrl`. Save the URL; you'll use it to drive the demo.
 
 ### Step 3: MCP target
 
-[`create-gateway-target`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway-target.html) attaches our MCP server to the gateway and tells AgentCore to authenticate via the OAuth2 credential provider with `grantType=AUTHORIZATION_CODE`:
+[`create-gateway-target`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway-target.html) attaches the Maverics MCP server to the gateway and tells AgentCore to authenticate via the OAuth2 credential provider with `grantType=CLIENT_CREDENTIALS`:
 
 ```json
 {
@@ -350,70 +347,99 @@ The response includes `gatewayId`. The script captures it.
       "oauthCredentialProvider": {
         "providerArn": "<from step 1>",
         "scopes": ["pii:read", "audit:read"],
-        "grantType": "AUTHORIZATION_CODE"
+        "grantType": "CLIENT_CREDENTIALS"
       }
     }
   }
 ]
 ```
 
-After the target is created it sits in `CREATING` until an admin completes the one-time OAuth consent.
+The target sits in `CREATING` for ~30 seconds while AgentCore obtains a token from Maverics and connects to the MCP server to fetch the tool list.
 
-## One-Time Admin Consent
+### Two configuration details that matter
 
-In the AWS console open **Bedrock > AgentCore > Gateways > maverics-gateway > Targets > maverics-mcp**. Click **Authorize**. AgentCore opens a browser tab pointed at the public Maverics OIDC Provider. Maverics federates to Keycloak. Sign in as one of the test users:
+1. **Token audience.** Maverics defaults the `aud` claim to the issuer URL (`https://auth.orchestrator.lab`) when the client_credentials request does not include an [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) `resource` parameter. AgentCore's credential provider does not expose `resource`, so the token aud is the issuer URL. The gateway's `expectedAudiences` must include that value. The lab's `mcpProvider.authorization.oauth.servers[0].tokenValidation.expectedAudiences` is set to `["https://auth.orchestrator.lab"]` for that reason.
+2. **Workload identity permissions.** AgentCore Gateway calls its own Identity service to fetch outbound OAuth tokens. The gateway role must allow `bedrock-agentcore:GetWorkloadAccessToken` on `arn:aws:bedrock-agentcore:*:*:workload-identity-directory/*`. `aws/gateway-role-policy.json` includes it.
 
-| User         | Email                         | Password    |
-| ------------ | ----------------------------- | ----------- |
-| John McClane | john.mcclane@orchestrator.lab | yippiekayay |
-| Sarah Connor | sarah.connor@orchestrator.lab | judgmentday |
+## Run the Demo
 
-Approve the requested scopes. Maverics issues an authorization code, AgentCore exchanges it for an access plus refresh token, and the target moves to **READY**. From here on out AgentCore can call Maverics on behalf of that user.
+Once the target is `READY`, drive the full chain end to end. Set the gateway URL the setup script printed and run the demo:
 
-## Run an Agent
+```bash
+export AGENTCORE_GATEWAY_URL=https://maverics-gateway-<id>.gateway.bedrock-agentcore.us-west-2.amazonaws.com/mcp
+make agentcore-demo
+```
 
-Create an AgentCore agent in the console: **Bedrock > AgentCore > Agents > Create**. Pick the model **Claude Sonnet 4.5** (or Haiku 4.5 for cheaper runs). Attach `maverics-gateway`. In the test panel, prompt it:
+Expected output:
 
-> List the first three accounts in the enterprise ledger.
+```
+==> 1. initialize
+    session: <uuid>
+==> 2. notifications/initialized
+==> 3. tools/list
+  - maverics-mcp___employee_directory_listEmployees
+  - maverics-mcp___enterprise_ledger_listAccounts
+  ... 11 more
+==> 4. tools/call maverics-mcp___enterprise_ledger_listAccounts
+isError: False
+---
+{
+  "accounts": [
+    {
+      "id": "...",
+      "account_number": "CHK-200001",
+      "holder_name": "Boba Fett",
+      "balance": 89100.75,
+      ...
+    },
+    ...
+  ]
+}
+```
 
-The agent invokes `enterprise_ledger_listAccounts`. Watch the gateway logs in another terminal:
+In a second terminal, watch the chain land in Maverics:
 
 ```bash
 docker compose logs -f ai-identity-gateway
 ```
 
-You should see one inbound MCP request, the OPA inbound policy evaluating, an RFC 8693 token exchange to mint a delegation token, and the upstream call. Now ask:
+You'll see, per call: `successfully validated access token`, `evaluating outbound authorization policy`, `successfully completed token exchange` (with `subject=bedrock-agentcore`, `actor.sub=ai-identity-gateway`), and the upstream backend call returning data.
 
-> Show me the customer PII for the first account.
+## Optional: drive it from a real Bedrock agent
 
-That tool requires the `pii:read` scope. The OPA inbound policy on Enterprise Ledger denies the call because the test user did not grant that scope. The agent receives a structured error and reports it back. Re-run the consent with `pii:read` added and the same call succeeds.
+Create an AgentCore agent in the console: **Bedrock > AgentCore > Agents > Create**. Pick the model **Claude Sonnet 4.5** (or Haiku 4.5 for cheaper runs). Attach `maverics-gateway`. In the test panel, prompt it:
+
+> List the first three accounts in the enterprise ledger.
+
+The agent calls `maverics-mcp___enterprise_ledger_listAccounts` through the same chain.
+
+A scope-deny demo is one config tweak away: switch the OAuth credential provider's scopes from `["pii:read","audit:read"]` to a smaller set, recreate the target, then ask the agent for `getCustomerPII`. The OPA inbound policy on Enterprise Ledger denies the call and the agent receives a structured error.
 
 ## The Audit Trail
 
-For each tool call the Maverics Authorization Server logs a delegation token exchange with the following claims:
+On every tool call, the Maverics Authorization Server logs an RFC 8693 token exchange with claims like:
 
 ```json
 {
-  "iss": "https://auth.<your-domain>",
-  "sub": "john.mcclane@orchestrator.lab",
-  "act": { "sub": "bedrock-agentcore" },
+  "iss": "https://auth.orchestrator.lab",
+  "sub": "bedrock-agentcore",
+  "act": { "sub": "ai-identity-gateway" },
   "aud": "https://enterprise-ledger.orchestrator.lab/",
   "scope": "ledger:ListAccounts",
   "exp": <iat + 5s>
 }
 ```
 
-The Enterprise Ledger and Employee Directory backends log the corresponding tool call under the same user. Two systems, one delegation chain, no shared service account anywhere. If something looks wrong, the audit log names the human and the agent that acted on their behalf. That is the property the prior tutorial called out and that this one inherits unchanged.
+The 2LO path uses the client identity `bedrock-agentcore` as `sub` (no end user is involved), and the gateway records itself as the acting party (`act.sub`). The backends log the same client identity, so a SIEM correlation joins on the `bedrock-agentcore` principal. To get the human on the audit line, use 3LO Authorization Code with PKCE (see the sidebar) once the issuer alignment is in place.
 
-## Sidebar: 2LO for Service-to-Service Work
+## Sidebar: Why 2LO First, 3LO Later
 
-Some agent workloads do not have an end user. Scheduled background tasks, ETL-style data movement, internal automation. For those, the repo includes `scripts/agentcore-setup-2lo.sh` which creates an alternate gateway and target with `grantType=CLIENT_CREDENTIALS`:
+The two AgentCore OAuth grants AgentCore Gateway exposes through its credential provider:
 
-```bash
-make agentcore-up-2lo
-```
+- **2LO Client Credentials.** Agent authenticates as the OAuth client. No end-user identity. Token `sub` is the client ID. Verified end-to-end in this lab.
+- **3LO Authorization Code with PKCE.** End-user identity flows through the agent and into the audit log via the `sub` claim. Requires AgentCore's `CUSTOM_JWT` inbound authorizer, which validates user JWTs against an OIDC discovery URL. AWS strictly requires that URL to end in `/.well-known/openid-configuration` (which Maverics serves) and that the JWT's `iss` claim match the discovery doc's `issuer`. To make 3LO work, Maverics' OIDC issuer needs to match the public Cloudflare hostname (`https://auth.<your-domain>`), which cascades into Keycloak redirect URIs and the gateway's `wellKnownEndpoint`. Doable, but more setup than fits in one blog post.
 
-The agent authenticates as itself. There is no `sub` claim representing a human, so the audit log shows the agent's service identity as the actor. The delegation chain shrinks to one party. Use 2LO only when there genuinely is no user driving the request. When there is a user, default to 3LO so user identity reaches the data and the audit log.
+The companion repo defaults to 2LO. The follow-up post will wire 3LO end to end.
 
 ## Tear Down
 
