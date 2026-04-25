@@ -3,7 +3,7 @@ templateKey: blog-post
 title: "Connect AWS Bedrock AgentCore to an OAuth-Protected MCP Server: A Step-by-Step Tutorial"
 date: 2026-04-25T00:00:00.000Z
 author: Nick Gamb
-description: "Step-by-step tutorial: connect an AWS Bedrock AgentCore Gateway to a Maverics-protected MCP server using OAuth 2.0 Client Credentials, RFC 8693 token exchange, OPA inbound policy, and a Cloudflare Tunnel. Verified end-to-end with a working demo script."
+description: "Step-by-step tutorial: connect an AWS Bedrock AgentCore Gateway to a Maverics-protected MCP server using OAuth 2.0 Client Credentials, RFC 8693 token exchange, OPA inbound policy, and a Cloudflare Tunnel. Includes a demo script that exercises the full chain."
 featuredpost: true
 featuredimage: /img/blog/connect-bedrock-hero.png
 category: Agentic Identity
@@ -92,7 +92,7 @@ Two files differ from the prior tutorial.
 
 ### The new OAuth client
 
-`orchestrator/oidc-provider/maverics.yaml` adds a `bedrock-agentcore` confidential client alongside the existing `mcp-client-cli` (kept so Claude Code still works against the same lab):
+`orchestrator/oidc-provider/maverics.yaml` adds a `bedrock-agentcore` confidential client alongside the existing `mcp-client-cli` from the prior tutorial:
 
 ```yaml
 - name: bedrock-agentcore
@@ -217,7 +217,7 @@ curl -s https://auth.<your-domain>/.well-known/oauth-authorization-server | jq .
 # "https://auth.orchestrator.lab"
 ```
 
-The issuer is the lab hostname even though you are reaching it over a public DNS name. That is fine for the federation Maverics needs and matches the JWT `iss` value AgentCore will see.
+The issuer in the discovery doc is the internal hostname Maverics serves under, even though you reach it through the public Cloudflare URL. That value also appears as the `iss` claim on every issued JWT, which is what the gateway validates on inbound requests.
 
 ## AWS Account Setup
 
@@ -282,7 +282,7 @@ source .env
 make agentcore-up
 ```
 
-The verified-working tutorial path uses **2LO Client Credentials**. The agent authenticates as a service identity, not as a specific human. 3LO Authorization Code is a natural extension once Maverics' OIDC issuer is aligned with the public Cloudflare hostname (so AgentCore's `CUSTOM_JWT` authorizer can validate the iss claim). That alignment is out of scope for the lab.
+The tutorial wires **2LO Client Credentials**: the agent authenticates as the `bedrock-agentcore` OAuth client, and the gateway carries that identity into every backend call. The sidebar below covers when 3LO Authorization Code is the right call instead.
 
 ### Step 1: OAuth2 credential provider
 
@@ -310,7 +310,7 @@ The response includes a `credentialProviderArn`. The script captures it.
 
 ### Step 2: Gateway
 
-[`create-gateway`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway.html) creates the AgentCore Gateway. The script uses `--authorizer-type NONE` (we are consuming an external MCP server, not exposing one) and `--exception-level DEBUG` so tool-call errors come back with detailed messages instead of "An internal error occurred":
+[`create-gateway`](https://docs.aws.amazon.com/cli/latest/reference/bedrock-agentcore-control/create-gateway.html) creates the AgentCore Gateway. The script uses `--authorizer-type NONE` (the gateway consumes an external MCP server, not exposing one) and `--exception-level DEBUG` so tool-call failures return detailed error messages:
 
 ```bash
 aws bedrock-agentcore-control create-gateway \
@@ -356,10 +356,10 @@ The response includes `gatewayId` and `gatewayUrl`. Save the URL; you'll use it 
 
 The target sits in `CREATING` for ~30 seconds while AgentCore obtains a token from Maverics and connects to the MCP server to fetch the tool list.
 
-### Two configuration details that matter
+### Two configuration details to be aware of
 
-1. **Token audience.** Maverics defaults the `aud` claim to the issuer URL (`https://auth.orchestrator.lab`) when the client_credentials request does not include an [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) `resource` parameter. AgentCore's credential provider does not expose `resource`, so the token aud is the issuer URL. The gateway's `expectedAudiences` must include that value. The lab's `mcpProvider.authorization.oauth.servers[0].tokenValidation.expectedAudiences` is set to `["https://auth.orchestrator.lab"]` for that reason.
-2. **Workload identity permissions.** AgentCore Gateway calls its own Identity service to fetch outbound OAuth tokens. The gateway role must allow `bedrock-agentcore:GetWorkloadAccessToken` on `arn:aws:bedrock-agentcore:*:*:workload-identity-directory/*`. `aws/gateway-role-policy.json` includes it.
+1. **Token audience.** On Client Credentials grants, the OAuth provider issues tokens with `aud` set to the issuer URL (`https://auth.orchestrator.lab`). The gateway's `expectedAudiences` matches that value so the token validates. If your OAuth provider supports the [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) `resource` parameter and you want a more specific audience on the token, configure both ends to match.
+2. **Gateway role permissions.** AgentCore Gateway calls its own Identity service to fetch outbound OAuth tokens, so the gateway role must allow `bedrock-agentcore:GetWorkloadAccessToken` on `arn:aws:bedrock-agentcore:*:*:workload-identity-directory/*`. The repo's `aws/gateway-role-policy.json` includes the necessary permissions.
 
 ## Run the Demo
 
@@ -430,16 +430,16 @@ On every tool call, the Maverics Authorization Server logs an RFC 8693 token exc
 }
 ```
 
-The 2LO path uses the client identity `bedrock-agentcore` as `sub` (no end user is involved), and the gateway records itself as the acting party (`act.sub`). The backends log the same client identity, so a SIEM correlation joins on the `bedrock-agentcore` principal. To get the human on the audit line, use 3LO Authorization Code with PKCE (see the sidebar) once the issuer alignment is in place.
+Under 2LO, `sub` is the OAuth client identity (`bedrock-agentcore`) and `act.sub` is the gateway. Backends log that same client identity, so a SIEM joins on `bedrock-agentcore` to reconstruct the call chain. For per-user identity on every audit line, use 3LO Authorization Code with PKCE; see the sidebar.
 
-## Sidebar: Why 2LO First, 3LO Later
+## Sidebar: Choosing 2LO vs 3LO
 
-The two AgentCore OAuth grants AgentCore Gateway exposes through its credential provider:
+AgentCore Gateway's credential provider supports two OAuth grants for outbound calls:
 
-- **2LO Client Credentials.** Agent authenticates as the OAuth client. No end-user identity. Token `sub` is the client ID. Verified end-to-end in this lab.
-- **3LO Authorization Code with PKCE.** End-user identity flows through the agent and into the audit log via the `sub` claim. Requires AgentCore's `CUSTOM_JWT` inbound authorizer, which validates user JWTs against an OIDC discovery URL. AWS strictly requires that URL to end in `/.well-known/openid-configuration` (which Maverics serves) and that the JWT's `iss` claim match the discovery doc's `issuer`. To make 3LO work, Maverics' OIDC issuer needs to match the public Cloudflare hostname (`https://auth.<your-domain>`), which cascades into Keycloak redirect URIs and the gateway's `wellKnownEndpoint`. Doable, but more setup than fits in one blog post.
+- **2LO Client Credentials.** The agent authenticates as the OAuth client. No end-user identity is involved. Best for service-to-service workflows: scheduled background tasks, ETL-style data movement, internal automation. This is what the tutorial uses.
+- **3LO Authorization Code with PKCE.** End-user identity flows through the agent and into the audit log via the `sub` claim. Best for interactive workflows where a human is in the loop. Requires AgentCore's `CUSTOM_JWT` inbound authorizer pointed at an OIDC discovery URL ending in `/.well-known/openid-configuration`, with the OAuth provider's `issuer` matching the URL the agent reaches it at.
 
-The companion repo defaults to 2LO. The follow-up post will wire 3LO end to end.
+Pick 2LO when there is no human driving the request. Pick 3LO when there is.
 
 ## Tear Down
 
