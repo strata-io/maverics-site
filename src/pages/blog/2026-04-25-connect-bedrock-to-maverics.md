@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
-title: "Plug AWS Bedrock Into Your Identity Layer. Same Gateway. Different Agent."
+title: "Connect AWS Bedrock AgentCore to an OAuth-Protected MCP Server: A Step-by-Step Tutorial"
 date: 2026-04-25T00:00:00.000Z
 author: Nick Gamb
-description: "AWS Bedrock AgentCore is a first-class MCP client. The Maverics AI Identity Gateway it connects to is the same one Claude Code connected to in the prior post. This walks the full tutorial: clone the project, expose the lab over Cloudflare Tunnel, wire up AgentCore via the AWS CLI, and watch the delegation chain land in the audit log."
+description: "Step-by-step tutorial: connect an AWS Bedrock AgentCore agent to a Maverics-protected MCP server using OAuth 2.0 Authorization Code with PKCE, RFC 8693 token exchange, and a Cloudflare Tunnel. End-user identity reaches every tool call."
 featuredpost: true
 featuredimage: /img/blog/connect-bedrock-hero.png
 category: Agentic Identity
@@ -236,9 +236,15 @@ If you already have AWS configured, skip ahead. If not:
    # Default region: us-west-2
    # Default output: json
    ```
-7. Request Bedrock model access in the console: **Bedrock > Model access > Modify model access**. Enable **Anthropic Claude 3.5 Sonnet v2**. Approval is usually instant.
+7. Bedrock model access. AWS retired the Model access page; serverless foundation models are auto-enabled on first invoke. The first time you invoke an Anthropic model the console may ask for a one-time use case form. Quickly verify access from the CLI:
+   ```bash
+   aws bedrock list-inference-profiles --region us-west-2 --type-equals SYSTEM_DEFINED \
+     --query "inferenceProfileSummaries[?contains(inferenceProfileId, 'sonnet-4-5') || contains(inferenceProfileId, 'haiku-4-5')].inferenceProfileId" \
+     --output text
+   ```
+   You should see entries like `us.anthropic.claude-sonnet-4-5-20250929-v1:0`. Modern Anthropic models on Bedrock are accessed via cross-region inference profiles, not direct model IDs. The tutorial uses Claude Sonnet 4.5 (Haiku 4.5 for cheaper runs).
 
-Cost note. Claude 3.5 Sonnet on Bedrock is roughly $3 per million input tokens and $15 per million output tokens. A short demo session of a hundred tool calls is well under a dollar. AgentCore agents do internal LLM calls for planning, so a single user prompt can spawn five or more model invocations. Run `make agentcore-down` when done so you stop paying for the gateway and target.
+Cost note. Claude Sonnet 4.5 on Bedrock is roughly $3 per million input tokens and $15 per million output tokens; Haiku 4.5 is about a tenth of that. A short demo session of a hundred tool calls is well under a dollar on Sonnet. AgentCore agents do internal LLM calls for planning, so a single user prompt can spawn five or more model invocations. Run `make agentcore-down` when done so you stop paying for the gateway and target.
 
 ## Bootstrap the Gateway IAM Role
 
@@ -366,7 +372,7 @@ Approve the requested scopes. Maverics issues an authorization code, AgentCore e
 
 ## Run an Agent
 
-Create an AgentCore agent in the console: **Bedrock > AgentCore > Agents > Create**. Pick the model **Anthropic Claude 3.5 Sonnet v2**. Attach `maverics-gateway`. In the test panel, prompt it:
+Create an AgentCore agent in the console: **Bedrock > AgentCore > Agents > Create**. Pick the model **Claude Sonnet 4.5** (or Haiku 4.5 for cheaper runs). Attach `maverics-gateway`. In the test panel, prompt it:
 
 > List the first three accounts in the enterprise ledger.
 
